@@ -1,0 +1,49 @@
+name: Bootstrap audited research release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct audited source tree
+        run: |
+          cat bootstrap/part-*.b64 | base64 -d > /tmp/usco-source.tar.gz
+          tar -xzf /tmp/usco-source.tar.gz
+          rm -rf bootstrap
+      - name: Install research dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Download and verify official Census BDS source
+        run: |
+          curl -L --fail --retry 3 -o /tmp/bds2023_st_sec.csv \
+            https://www2.census.gov/programs-surveys/bds/tables/time-series/2023/bds2023_st_sec.csv
+          echo "ba73f1ad58749d57f04c6bb56b0618c92384897a3e9f793de0df7b23f1f1868a  /tmp/bds2023_st_sec.csv" | sha256sum -c -
+      - name: Build full research release from public source
+        env:
+          BDS_SOURCE: /tmp/bds2023_st_sec.csv
+        run: |
+          python scripts/build_research_assets.py
+          python scripts/run_score_sensitivity.py
+          python scripts/build_advanced_diagnostics.py
+          node --check assets/app.js
+          python scripts/validate_release.py
+      - name: Commit full audited project
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Publish audited U.S. Consolidation Observatory v0.2 [skip ci]"
+          git push
