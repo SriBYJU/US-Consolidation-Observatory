@@ -1,0 +1,70 @@
+name: Update About section
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-about.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-about:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Update About content and links
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text()
+
+          old_para = '''His work includes finance and M&amp;A research, AI/data products, a cyber-risk intelligence initiative, and a solar-powered smart-irrigation project that expanded from a small pilot to 15+ acres on family farmland in India. Outside technology and finance, he has competed seriously in pickleball and independently secured sponsorships/partnerships with brands including Paddletek, Franklin Sports, HEAD, and Acacia Sports.'''
+          new_para = '''His work includes finance and M&amp;A research, AI/data products, a cyber-risk intelligence initiative, and 30+ industry certifications and credentials spanning finance, artificial intelligence, cybersecurity, and technology. Outside technology and finance, he has competed seriously in pickleball and independently secured sponsorships/partnerships with brands including Paddletek, Franklin Sports, HEAD, and Acacia Sports.'''
+
+          old_actions = '''<div class="hero-actions"><a class="button primary" href="https://github.com/SriBYJU" target="_blank" rel="noreferrer">GitHub profile ↗</a><a class="button" href="README.md">Project README</a></div>'''
+          new_actions = '''<div class="about-contact"><b>Contact:</b> <a href="mailto:avadhanula.shriyan@gmail.com">avadhanula.shriyan@gmail.com</a></div>
+          <div class="hero-actions"><a class="button primary" href="https://github.com/SriBYJU/US-Consolidation-Observatory" target="_blank" rel="noreferrer">GitHub repository ↗</a><a class="button" href="https://www.linkedin.com/in/shriyan-avadhanula" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="button" href="mailto:avadhanula.shriyan@gmail.com">Email me</a></div>'''
+
+          if old_para not in s:
+              raise SystemExit('Expected old About paragraph not found')
+          if old_actions not in s:
+              raise SystemExit('Expected old About buttons not found')
+          if 'assets/shriyan-about.jpg' not in s:
+              raise SystemExit('Expected old portrait path not found')
+
+          s = s.replace('assets/shriyan-about.jpg', 'assets/sriabt.PNG')
+          s = s.replace(old_para, new_para)
+          s = s.replace(old_actions, new_actions)
+          p.write_text(s)
+
+          css = Path('assets/styles.css')
+          c = css.read_text()
+          marker = '/* About contact card */'
+          if marker not in c:
+              c += '''\n\n/* About contact card */\n.about-contact{margin:18px 0 4px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--blue) 5%,var(--card));font-size:.88rem}.about-contact a{color:var(--blue);font-weight:750;text-decoration:none}.about-contact a:hover{text-decoration:underline}\n'''
+              css.write_text(c)
+          PY
+
+          test -s assets/sriabt.PNG
+          grep -q 'assets/sriabt.PNG' index.html
+          grep -q '30+ industry certifications and credentials' index.html
+          grep -q 'github.com/SriBYJU/US-Consolidation-Observatory' index.html
+          grep -q 'linkedin.com/in/shriyan-avadhanula' index.html
+          grep -q 'mailto:avadhanula.shriyan@gmail.com' index.html
+          ! grep -q 'solar-powered smart-irrigation' index.html
+          ! grep -q '>Project README<' index.html
+      - name: Remove temporary updater and commit
+        run: |
+          rm -f .github/workflows/update-about.yml
+          git config user.name "SriBYJU"
+          git config user.email "95580233+SriBYJU@users.noreply.github.com"
+          git add index.html assets/styles.css .github/workflows/update-about.yml
+          git commit -m "Polish About section, links, and portrait"
+          git push origin main
