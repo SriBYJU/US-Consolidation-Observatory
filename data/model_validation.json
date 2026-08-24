@@ -1,0 +1,109 @@
+{
+  "target": "Two-year-ahead annualized log establishment growth (not M&A activity)",
+  "train_years": "1990\u20132016",
+  "validation_years": "2017\u20132019",
+  "holdout_feature_years": "2020\u20132021 (targets fall in 2022\u20132023)",
+  "features": [
+    "firms_per_1000_emp",
+    "estabs_entry_rate",
+    "estabs_exit_rate",
+    "net_job_creation_rate",
+    "reallocation_rate",
+    "log_firms",
+    "log_emp",
+    "lag_growth_2y_ann"
+  ],
+  "model_selection_rule": "Lowest validation MAE; holdout not used for selection",
+  "metrics": [
+    {
+      "model": "Persistence baseline",
+      "split": "validation",
+      "n": 2901,
+      "mae_ann_log_pct": 1.828,
+      "spearman": 0.438,
+      "top_decile_precision": 0.316
+    },
+    {
+      "model": "Persistence baseline",
+      "split": "holdout",
+      "n": 1934,
+      "mae_ann_log_pct": 2.11,
+      "spearman": 0.391,
+      "top_decile_precision": 0.289
+    },
+    {
+      "model": "Ridge",
+      "split": "validation",
+      "n": 2901,
+      "mae_ann_log_pct": 1.456,
+      "spearman": 0.49,
+      "top_decile_precision": 0.371
+    },
+    {
+      "model": "Ridge",
+      "split": "holdout",
+      "n": 1934,
+      "mae_ann_log_pct": 1.866,
+      "spearman": 0.369,
+      "top_decile_precision": 0.284
+    },
+    {
+      "model": "Histogram Gradient Boosting",
+      "split": "validation",
+      "n": 2901,
+      "mae_ann_log_pct": 1.384,
+      "spearman": 0.528,
+      "top_decile_precision": 0.392
+    },
+    {
+      "model": "Histogram Gradient Boosting",
+      "split": "holdout",
+      "n": 1934,
+      "mae_ann_log_pct": 1.89,
+      "spearman": 0.379,
+      "top_decile_precision": 0.335
+    }
+  ],
+  "selected_model": "Histogram Gradient Boosting",
+  "selected_holdout": {
+    "model": "Histogram Gradient Boosting",
+    "split": "holdout",
+    "n": 1934,
+    "mae_ann_log_pct": 1.89,
+    "spearman": 0.379,
+    "top_decile_precision": 0.335
+  },
+  "segment_error_top5": [
+    {
+      "sector": "21",
+      "n": 100,
+      "mae": 3.77,
+      "sector_name": "Mining, quarrying, oil & gas extraction"
+    },
+    {
+      "sector": "11",
+      "n": 100,
+      "mae": 3.077,
+      "sector_name": "Agriculture, forestry, fishing & hunting"
+    },
+    {
+      "sector": "22",
+      "n": 102,
+      "mae": 3.015,
+      "sector_name": "Utilities"
+    },
+    {
+      "sector": "71",
+      "n": 102,
+      "mae": 2.931,
+      "sector_name": "Arts, entertainment & recreation"
+    },
+    {
+      "sector": "55",
+      "n": 102,
+      "mae": 2.874,
+      "sector_name": "Management of companies & enterprises"
+    }
+  ],
+  "warning": "This validates the point-in-time modeling pipeline against future establishment growth only. It does not validate acquisition or investment-return forecasting."
+}

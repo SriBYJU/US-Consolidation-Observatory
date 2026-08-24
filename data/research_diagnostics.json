@@ -1,0 +1,540 @@
+{
+  "version": "v0.2",
+  "target": "Two-year-ahead annualized log establishment growth (not M&A activity)",
+  "descriptive_replay": {
+    "summary": {
+      "cohort_years": "1978\u20132021",
+      "cohorts": 44,
+      "positive_uplift_cohorts": 43,
+      "mean_uplift_ann_log_pct": 0.79,
+      "median_uplift_ann_log_pct": 0.754,
+      "interpretation": "Exploratory, post-hoc descriptive replay. SRS was not optimized against this outcome and this does not validate M&A forecasting."
+    },
+    "annual": [
+      {
+        "year": 1978,
+        "n": 953,
+        "top_quintile_mean_growth": 3.468,
+        "rest_mean_growth": 2.664,
+        "uplift": 0.804,
+        "spearman_srs_future_growth": 0.152
+      },
+      {
+        "year": 1979,
+        "n": 951,
+        "top_quintile_mean_growth": 2.741,
+        "rest_mean_growth": 1.71,
+        "uplift": 1.031,
+        "spearman_srs_future_growth": 0.127
+      },
+      {
+        "year": 1980,
+        "n": 949,
+        "top_quintile_mean_growth": 2.451,
+        "rest_mean_growth": 0.955,
+        "uplift": 1.496,
+        "spearman_srs_future_growth": 0.162
+      },
+      {
+        "year": 1981,
+        "n": 949,
+        "top_quintile_mean_growth": 2.439,
+        "rest_mean_growth": 0.875,
+        "uplift": 1.564,
+        "spearman_srs_future_growth": 0.164
+      },
+      {
+        "year": 1982,
+        "n": 945,
+        "top_quintile_mean_growth": 3.964,
+        "rest_mean_growth": 2.668,
+        "uplift": 1.296,
+        "spearman_srs_future_growth": 0.145
+      },
+      {
+        "year": 1983,
+        "n": 948,
+        "top_quintile_mean_growth": 4.055,
+        "rest_mean_growth": 2.574,
+        "uplift": 1.481,
+        "spearman_srs_future_growth": 0.212
+      },
+      {
+        "year": 1984,
+        "n": 950,
+        "top_quintile_mean_growth": 2.525,
+        "rest_mean_growth": 1.561,
+        "uplift": 0.964,
+        "spearman_srs_future_growth": 0.117
+      },
+      {
+        "year": 1985,
+        "n": 952,
+        "top_quintile_mean_growth": 2.563,
+        "rest_mean_growth": 1.442,
+        "uplift": 1.121,
+        "spearman_srs_future_growth": 0.145
+      },
+      {
+        "year": 1986,
+        "n": 952,
+        "top_quintile_mean_growth": 3.432,
+        "rest_mean_growth": 1.836,
+        "uplift": 1.596,
+        "spearman_srs_future_growth": 0.228
+      },
+      {
+        "year": 1987,
+        "n": 951,
+        "top_quintile_mean_growth": 3.392,
+        "rest_mean_growth": 2.676,
+        "uplift": 0.717,
+        "spearman_srs_future_growth": 0.19
+      },
+      {
+        "year": 1988,
+        "n": 954,
+        "top_quintile_mean_growth": 2.615,
+        "rest_mean_growth": 2.327,
+        "uplift": 0.287,
+        "spearman_srs_future_growth": 0.075
+      },
+      {
+        "year": 1989,
+        "n": 950,
+        "top_quintile_mean_growth": 2.768,
+        "rest_mean_growth": 1.837,
+        "uplift": 0.932,
+        "spearman_srs_future_growth": 0.154
+      },
+      {
+        "year": 1990,
+        "n": 958,
+        "top_quintile_mean_growth": 2.032,
+        "rest_mean_growth": 1.048,
+        "uplift": 0.983,
+        "spearman_srs_future_growth": 0.227
+      },
+      {
+        "year": 1991,
+        "n": 958,
+        "top_quintile_mean_growth": 2.124,
+        "rest_mean_growth": 0.854,
+        "uplift": 1.27,
+        "spearman_srs_future_growth": 0.259
+      },
+      {
+        "year": 1992,
+        "n": 956,
+        "top_quintile_mean_growth": 3.105,
+        "rest_mean_growth": 1.941,
+        "uplift": 1.164,
+        "spearman_srs_future_growth": 0.26
+      },
+      {
+        "year": 1993,
+        "n": 945,
+        "top_quintile_mean_growth": 3.431,
+        "rest_mean_growth": 2.379,
+        "uplift": 1.052,
+        "spearman_srs_future_growth": 0.236
+      },
+      {
+        "year": 1994,
+        "n": 958,
+        "top_quintile_mean_growth": 2.847,
+        "rest_mean_growth": 1.913,
+        "uplift": 0.934,
+        "spearman_srs_future_growth": 0.25
+      },
+      {
+        "year": 1995,
+        "n": 951,
+        "top_quintile_mean_growth": 2.145,
+        "rest_mean_growth": 1.25,
+        "uplift": 0.894,
+        "spearman_srs_future_growth": 0.187
+      },
+      {
+        "year": 1996,
+        "n": 951,
+        "top_quintile_mean_growth": 2.594,
+        "rest_mean_growth": 1.485,
+        "uplift": 1.109,
+        "spearman_srs_future_growth": 0.178
+      },
+      {
+        "year": 1997,
+        "n": 955,
+        "top_quintile_mean_growth": 2.145,
+        "rest_mean_growth": 1.531,
+        "uplift": 0.615,
+        "spearman_srs_future_growth": 0.117
+      },
+      {
+        "year": 1998,
+        "n": 956,
+        "top_quintile_mean_growth": 1.566,
+        "rest_mean_growth": 1.119,
+        "uplift": 0.447,
+        "spearman_srs_future_growth": 0.076
+      },
+      {
+        "year": 1999,
+        "n": 953,
+        "top_quintile_mean_growth": 1.372,
+        "rest_mean_growth": 0.966,
+        "uplift": 0.406,
+        "spearman_srs_future_growth": 0.101
+      },
+      {
+        "year": 2000,
+        "n": 957,
+        "top_quintile_mean_growth": 1.303,
+        "rest_mean_growth": 0.686,
+        "uplift": 0.617,
+        "spearman_srs_future_growth": 0.111
+      },
+      {
+        "year": 2001,
+        "n": 955,
+        "top_quintile_mean_growth": 0.989,
+        "rest_mean_growth": 0.65,
+        "uplift": 0.339,
+        "spearman_srs_future_growth": 0.083
+      },
+      {
+        "year": 2002,
+        "n": 959,
+        "top_quintile_mean_growth": 1.462,
+        "rest_mean_growth": 0.94,
+        "uplift": 0.522,
+        "spearman_srs_future_growth": 0.126
+      },
+      {
+        "year": 2003,
+        "n": 955,
+        "top_quintile_mean_growth": 2.006,
+        "rest_mean_growth": 1.161,
+        "uplift": 0.845,
+        "spearman_srs_future_growth": 0.144
+      },
+      {
+        "year": 2004,
+        "n": 954,
+        "top_quintile_mean_growth": 2.456,
+        "rest_mean_growth": 1.617,
+        "uplift": 0.839,
+        "spearman_srs_future_growth": 0.192
+      },
+      {
+        "year": 2005,
+        "n": 953,
+        "top_quintile_mean_growth": 2.593,
+        "rest_mean_growth": 1.616,
+        "uplift": 0.977,
+        "spearman_srs_future_growth": 0.199
+      },
+      {
+        "year": 2006,
+        "n": 955,
+        "top_quintile_mean_growth": 0.821,
+        "rest_mean_growth": 0.202,
+        "uplift": 0.619,
+        "spearman_srs_future_growth": 0.155
+      },
+      {
+        "year": 2007,
+        "n": 954,
+        "top_quintile_mean_growth": -1.096,
+        "rest_mean_growth": -1.038,
+        "uplift": -0.058,
+        "spearman_srs_future_growth": 0.101
+      },
+      {
+        "year": 2008,
+        "n": 956,
+        "top_quintile_mean_growth": -0.795,
+        "rest_mean_growth": -1.381,
+        "uplift": 0.586,
+        "spearman_srs_future_growth": 0.085
+      },
+      {
+        "year": 2009,
+        "n": 951,
+        "top_quintile_mean_growth": -0.082,
+        "rest_mean_growth": -0.56,
+        "uplift": 0.478,
+        "spearman_srs_future_growth": 0.121
+      },
+      {
+        "year": 2010,
+        "n": 948,
+        "top_quintile_mean_growth": 0.788,
+        "rest_mean_growth": 0.284,
+        "uplift": 0.504,
+        "spearman_srs_future_growth": 0.138
+      },
+      {
+        "year": 2011,
+        "n": 951,
+        "top_quintile_mean_growth": 1.139,
+        "rest_mean_growth": 0.522,
+        "uplift": 0.616,
+        "spearman_srs_future_growth": 0.205
+      },
+      {
+        "year": 2012,
+        "n": 954,
+        "top_quintile_mean_growth": 1.176,
+        "rest_mean_growth": 0.493,
+        "uplift": 0.683,
+        "spearman_srs_future_growth": 0.153
+      },
+      {
+        "year": 2013,
+        "n": 952,
+        "top_quintile_mean_growth": 1.3,
+        "rest_mean_growth": 0.899,
+        "uplift": 0.402,
+        "spearman_srs_future_growth": 0.147
+      },
+      {
+        "year": 2014,
+        "n": 952,
+        "top_quintile_mean_growth": 1.659,
+        "rest_mean_growth": 1.299,
+        "uplift": 0.36,
+        "spearman_srs_future_growth": 0.145
+      },
+      {
+        "year": 2015,
+        "n": 950,
+        "top_quintile_mean_growth": 1.435,
+        "rest_mean_growth": 0.844,
+        "uplift": 0.591,
+        "spearman_srs_future_growth": 0.129
+      },
+      {
+        "year": 2016,
+        "n": 945,
+        "top_quintile_mean_growth": 0.727,
+        "rest_mean_growth": 0.285,
+        "uplift": 0.442,
+        "spearman_srs_future_growth": 0.158
+      },
+      {
+        "year": 2017,
+        "n": 947,
+        "top_quintile_mean_growth": 0.848,
+        "rest_mean_growth": 0.562,
+        "uplift": 0.286,
+        "spearman_srs_future_growth": 0.145
+      },
+      {
+        "year": 2018,
+        "n": 946,
+        "top_quintile_mean_growth": 1.027,
+        "rest_mean_growth": 0.236,
+        "uplift": 0.791,
+        "spearman_srs_future_growth": 0.222
+      },
+      {
+        "year": 2019,
+        "n": 947,
+        "top_quintile_mean_growth": 0.71,
+        "rest_mean_growth": 0.259,
+        "uplift": 0.451,
+        "spearman_srs_future_growth": 0.123
+      },
+      {
+        "year": 2020,
+        "n": 949,
+        "top_quintile_mean_growth": 2.178,
+        "rest_mean_growth": 0.961,
+        "uplift": 1.216,
+        "spearman_srs_future_growth": 0.224
+      },
+      {
+        "year": 2021,
+        "n": 947,
+        "top_quintile_mean_growth": 1.531,
+        "rest_mean_growth": 1.031,
+        "uplift": 0.5,
+        "spearman_srs_future_growth": 0.12
+      }
+    ]
+  },
+  "rolling_origin": {
+    "protocol": "Post-hoc rolling-origin robustness check using the already-fixed v0.1 HGB hyperparameters. Each window trains only on prior years; this analysis is not used to rewrite the original locked holdout result.",
+    "windows": [
+      {
+        "window": "2010\u20132012",
+        "training": "1990\u20132009",
+        "model": "Histogram Gradient Boosting",
+        "n": 2901,
+        "mae_ann_log_pct": 1.374,
+        "spearman": 0.327,
+        "top_decile_precision": 0.33
+      },
+      {
+        "window": "2010\u20132012",
+        "training": "1990\u20132009",
+        "model": "Persistence baseline",
+        "n": 2901,
+        "mae_ann_log_pct": 2.113,
+        "spearman": 0.287,
+        "top_decile_precision": 0.258
+      },
+      {
+        "window": "2013\u20132015",
+        "training": "1990\u20132012",
+        "model": "Histogram Gradient Boosting",
+        "n": 2901,
+        "mae_ann_log_pct": 1.465,
+        "spearman": 0.42,
+        "top_decile_precision": 0.299
+      },
+      {
+        "window": "2013\u20132015",
+        "training": "1990\u20132012",
+        "model": "Persistence baseline",
+        "n": 2901,
+        "mae_ann_log_pct": 1.762,
+        "spearman": 0.317,
+        "top_decile_precision": 0.282
+      },
+      {
+        "window": "2016\u20132018",
+        "training": "1990\u20132015",
+        "model": "Histogram Gradient Boosting",
+        "n": 2901,
+        "mae_ann_log_pct": 1.345,
+        "spearman": 0.547,
+        "top_decile_precision": 0.43
+      },
+      {
+        "window": "2016\u20132018",
+        "training": "1990\u20132015",
+        "model": "Persistence baseline",
+        "n": 2901,
+        "mae_ann_log_pct": 1.806,
+        "spearman": 0.447,
+        "top_decile_precision": 0.344
+      },
+      {
+        "window": "2019\u20132021",
+        "training": "1990\u20132018",
+        "model": "Histogram Gradient Boosting",
+        "n": 2901,
+        "mae_ann_log_pct": 1.798,
+        "spearman": 0.397,
+        "top_decile_precision": 0.34
+      },
+      {
+        "window": "2019\u20132021",
+        "training": "1990\u20132018",
+        "model": "Persistence baseline",
+        "n": 2901,
+        "mae_ann_log_pct": 2.052,
+        "spearman": 0.379,
+        "top_decile_precision": 0.299
+      }
+    ],
+    "wins_vs_persistence": {
+      "mae": 4,
+      "spearman": 4,
+      "top_decile_precision": 4
+    },
+    "window_count": 4
+  },
+  "feature_diagnostics": {
+    "split": "2017\u20132019 validation only",
+    "full_model_validation_mae": 1.3838,
+    "permutation_importance": [
+      {
+        "feature": "estabs_entry_rate",
+        "mae_increase_when_permuted": 0.2066,
+        "std": 0.0071
+      },
+      {
+        "feature": "lag_growth_2y_ann",
+        "mae_increase_when_permuted": 0.1552,
+        "std": 0.0071
+      },
+      {
+        "feature": "log_firms",
+        "mae_increase_when_permuted": 0.0304,
+        "std": 0.0035
+      },
+      {
+        "feature": "log_emp",
+        "mae_increase_when_permuted": 0.0297,
+        "std": 0.0061
+      },
+      {
+        "feature": "net_job_creation_rate",
+        "mae_increase_when_permuted": 0.0265,
+        "std": 0.005
+      },
+      {
+        "feature": "reallocation_rate",
+        "mae_increase_when_permuted": 0.0163,
+        "std": 0.0037
+      },
+      {
+        "feature": "firms_per_1000_emp",
+        "mae_increase_when_permuted": 0.0162,
+        "std": 0.003
+      },
+      {
+        "feature": "estabs_exit_rate",
+        "mae_increase_when_permuted": 0.0029,
+        "std": 0.0035
+      }
+    ],
+    "leave_one_feature_out": [
+      {
+        "removed_feature": "lag_growth_2y_ann",
+        "validation_mae": 1.428,
+        "delta_vs_full": 0.0442
+      },
+      {
+        "removed_feature": "estabs_entry_rate",
+        "validation_mae": 1.413,
+        "delta_vs_full": 0.0292
+      },
+      {
+        "removed_feature": "log_emp",
+        "validation_mae": 1.397,
+        "delta_vs_full": 0.0132
+      },
+      {
+        "removed_feature": "reallocation_rate",
+        "validation_mae": 1.394,
+        "delta_vs_full": 0.0102
+      },
+      {
+        "removed_feature": "log_firms",
+        "validation_mae": 1.3912,
+        "delta_vs_full": 0.0074
+      },
+      {
+        "removed_feature": "firms_per_1000_emp",
+        "validation_mae": 1.3887,
+        "delta_vs_full": 0.0049
+      },
+      {
+        "removed_feature": "estabs_exit_rate",
+        "validation_mae": 1.3766,
+        "delta_vs_full": -0.0073
+      },
+      {
+        "removed_feature": "net_job_creation_rate",
+        "validation_mae": 1.3636,
+        "delta_vs_full": -0.0202
+      }
+    ],
+    "warning": "Post-selection diagnostics only. They are not used to change the frozen v0.1 model after holdout inspection."
+  }
+}

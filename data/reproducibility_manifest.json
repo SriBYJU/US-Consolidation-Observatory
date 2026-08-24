@@ -1,0 +1,35 @@
+{
+  "project": "U.S. Consolidation Observatory",
+  "release": "v0.2 technical platform",
+  "python": "3.12.14",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "packages": {
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.18.1"
+  },
+  "source_sha256": "ba73f1ad58749d57f04c6bb56b0618c92384897a3e9f793de0df7b23f1f1868a",
+  "file_sha256": {
+    "scripts/build_research_assets.py": "fcc8ae854b7521db9776a8406fc6c704223052d0c161561b441228ed6c2d3b49",
+    "scripts/run_score_sensitivity.py": "f05473f64d80901145cb598dfefd1baec7eb9e9682c31137f5c56542a4c7183b",
+    "scripts/build_advanced_diagnostics.py": "205fb32c478d0419a2c766c539c87c13a428f1f069b21539671aa380f724b466",
+    "scripts/validate_release.py": "8d2f3813347e819d87f3277d056cf6428d95cc5e8e9111386fee18ebc83b8410",
+    "index.html": "aadd29b20eefa96c38fa5f8b593a4187aa9ea04607cff2a15b8e8624b760ff21",
+    "assets/app.js": "870f8eb2a370307806b87e9ea43ea92897ac6e322f65480b6fbedfb305183c75",
+    "assets/styles.css": "0e407044cff088536c4004251b6ab7191c32a3fb6af46766bbb7b32149eaee9c",
+    "research/model-card.md": "8907b22d6f3f90046c038c7f3a7bffd7c66d2265b740bdf0e4248b5abfa1dc7d",
+    "research/hypothesis-registry.md": "80b154f7ae37bab608e73a020a2c73f945f98fcff622520451ad07ffd0ea32cd",
+    "data/bds_state_sector_panel.csv.gz": "b801c9c7cff089034b0b10b08e2e25fceb11d1e0181413ba2d89de84f1c54020",
+    "data/model_validation.json": "20e294c59f02d880c907dd80eec09e75b8a98178b3ae893c24fa4b006d55e368",
+    "data/score_sensitivity_2023.json": "3089da65daae26b5246652eaf16e81ceac447a63f35ad762e28c69e592f93387",
+    "data/research_diagnostics.json": "be8dd0855ad4f7cbf42cf97e38b5c7aa4f7e2178a523131fd011fcc155410f85"
+  },
+  "build_commands": [
+    "python scripts/build_research_assets.py",
+    "python scripts/run_score_sensitivity.py",
+    "python scripts/build_advanced_diagnostics.py",
+    "python scripts/validate_release.py"
+  ],
+  "note": "Hashes fingerprint the exact scripts and derived artifacts used by this release. Git commit SHA should be added to immutable future forecasts once the repository exists."
+}

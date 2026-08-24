@@ -1,0 +1,32 @@
+{
+  "project": "U.S. Consolidation Observatory",
+  "build_data_release": "BDS 2023",
+  "panel_rows": 44574,
+  "jurisdictions": 51,
+  "sectors": 19,
+  "years": "1978\u20132023",
+  "latest_year": 2023,
+  "qcew_2024": {
+    "establishments": 12057371,
+    "employment": 154990441,
+    "wages": 11714940541109,
+    "source": "https://www.bls.gov/cew/publications/employment-and-wages-annual-averages/2024/chart-data.htm"
+  },
+  "bea_q1_2026": {
+    "states_plus_dc_growth": 47,
+    "highest": "Washington +4.5%",
+    "lowest": "South Dakota \u22121.6%",
+    "release": "June 25, 2026",
+    "source": "https://www.bea.gov/data/gdp/gdp-state"
+  },
+  "score_name": "Structural Readiness Score (exploratory)",
+  "score_weights": {
+    "Fragmentation proxy": 25,
+    "Establishment entry": 20,
+    "Net job creation momentum": 20,
+    "Firm scale": 15,
+    "Establishment stability": 10,
+    "Labor reallocation/dynamism": 10
+  },
+  "score_disclaimer": "Exploratory structural summary only. It is not a validated M&A forecast, company valuation, investment recommendation, or prediction of returns."
+}
