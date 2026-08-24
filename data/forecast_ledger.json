@@ -1,0 +1,6 @@
+{
+  "version": "0.1",
+  "status": "no-forecast-issued",
+  "principle": "A consolidation forecast is not published until the transaction-outcome corpus and benchmark gates in RESEARCH_MILESTONES.md are met.",
+  "entries": []
+}

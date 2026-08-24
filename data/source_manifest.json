@@ -1,0 +1,14 @@
+{
+  "dataset": "U.S. Census Bureau 2023 Business Dynamics Statistics — State by Sector",
+  "source_url": "https://www2.census.gov/programs-surveys/bds/tables/time-series/2023/bds2023_st_sec.csv",
+  "landing_url": "https://www.census.gov/data/datasets/time-series/econ/bds/bds-datasets.html",
+  "sha256": "ba73f1ad58749d57f04c6bb56b0618c92384897a3e9f793de0df7b23f1f1868a",
+  "raw_bytes": 6200679,
+  "rows": 44574,
+  "min_year": 1978,
+  "max_year": 2023,
+  "states_and_dc": 51,
+  "sectors": 19,
+  "duplicate_key_rows": 0,
+  "suppression_note": "Census suppression/non-numeric codes are converted to missing values, never to zero."
+}

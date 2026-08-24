@@ -1,9 +1,17 @@
-name: Validate research release
+name: Build and deploy Observatory
 on:
   push:
-  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
 jobs:
-  validate:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,14 +26,28 @@ jobs:
         run: |
           curl -fsSL https://www2.census.gov/programs-surveys/bds/tables/time-series/2023/bds2023_st_sec.csv -o /tmp/bds2023_st_sec.csv
           echo "ba73f1ad58749d57f04c6bb56b0618c92384897a3e9f793de0df7b23f1f1868a  /tmp/bds2023_st_sec.csv" | sha256sum -c -
-      - name: Rebuild research artifacts
+      - name: Rebuild and validate
         env:
           BDS_SOURCE: /tmp/bds2023_st_sec.csv
         run: |
           python scripts/build_research_assets.py
           python scripts/run_score_sensitivity.py
           python scripts/build_advanced_diagnostics.py
-      - run: node --check assets/app-core.js
-      - run: node --check assets/app-ui.js
-      - run: node --check assets/app.js
-      - run: python scripts/validate_release.py
+          node --check assets/app-core.js
+          node --check assets/app-ui.js
+          node --check assets/app.js
+          python scripts/validate_release.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
