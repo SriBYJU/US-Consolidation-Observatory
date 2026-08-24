@@ -1,5 +1,5 @@
 {
-  "dataset": "U.S. Census Bureau 2023 Business Dynamics Statistics — State by Sector",
+  "dataset": "U.S. Census Bureau 2023 Business Dynamics Statistics \u2014 State by Sector",
   "source_url": "https://www2.census.gov/programs-surveys/bds/tables/time-series/2023/bds2023_st_sec.csv",
   "landing_url": "https://www.census.gov/data/datasets/time-series/econ/bds/bds-datasets.html",
   "sha256": "ba73f1ad58749d57f04c6bb56b0618c92384897a3e9f793de0df7b23f1f1868a",
