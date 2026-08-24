@@ -1,0 +1,64 @@
+ne);border-radius:999px;font-size:.82rem;color:var(--muted);background:color-mix(in srgb,var(--panel) 82%,transparent)}
++.data-status.ready{border-color:color-mix(in srgb,#22c55e 48%,var(--line));color:var(--text)}
++.data-status.error{border-color:color-mix(in srgb,#ef4444 48%,var(--line));color:var(--text)}
++.public-data-showcase{padding-top:34px}
++.public-data-showcase .context-cards{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:18px}
++.public-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:16px}
++.public-fact{min-height:170px;display:flex;flex-direction:column;justify-content:flex-start}
++.public-fact>b{font-size:2rem;letter-spacing:-.04em;margin:.4rem 0 .25rem}
++.public-fact p{margin:.1rem 0 .5rem;color:var(--muted);line-height:1.45}
++.public-fact small{margin-top:auto;color:var(--muted)}
++.context-band{margin-top:16px;padding:16px 18px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,color-mix(in srgb,var(--blue) 9%,var(--panel)),var(--panel));display:flex;justify-content:space-between;gap:20px;align-items:center}
++.context-band div{display:flex;gap:10px;flex-wrap:wrap}.context-band span{color:var(--muted)}.context-band a{white-space:nowrap}
++.guide-section{background:color-mix(in srgb,var(--panel) 75%,transparent);border-block:1px solid var(--line)}
++.guide-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
++.guide-grid article{padding:22px;border:1px solid var(--line);border-radius:20px;background:var(--panel)}
++.guide-grid article>span{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--blue) 12%,transparent);color:var(--blue);font-weight:800}
++.guide-grid h3{margin:14px 0 8px}.guide-grid p{margin:0;color:var(--muted);line-height:1.55}
++.guide-callout{margin-top:16px;padding:16px 18px;border-left:4px solid var(--blue);background:color-mix(in srgb,var(--blue) 7%,var(--panel));border-radius:12px;line-height:1.55}
++.method-preview-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:12px;align-items:stretch}
++.method-preview-flow>div{padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--panel);display:flex;flex-direction:column;gap:6px}.method-preview-flow span{color:var(--muted);line-height:1.45}.method-preview-flow>i{align-self:center;font-style:normal;color:var(--muted);font-size:1.4rem}
++.about-section{background:linear-gradient(180deg,color-mix(in srgb,var(--blue) 4%,var(--bg)),var(--bg));border-top:1px solid var(--line)}
++.about-grid{display:grid;grid-template-columns:minmax(240px,330px) 1fr;gap:42px;align-items:center}
++.about-photo-wrap{position:relative}.about-photo{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:26px;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.16);background:var(--panel)}
++.photo-note{position:absolute;left:14px;right:14px;bottom:14px;padding:10px 12px;border-radius:12px;background:rgba(7,12,24,.78);color:white;text-align:center;font-size:.82rem;backdrop-filter:blur(8px)}
++.about-lede{font-size:1.15rem;line-height:1.65;color:var(--text)}.about-grid p:not(.about-lede){color:var(--muted);line-height:1.7}
++.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.about-tags span{padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:.82rem}
++.data-error-banner{margin:0;padding:12px 18px;background:#fff7ed;color:#7c2d12;border-bottom:1px solid #fdba74;text-align:center;font-size:.9rem}
++@media(max-width:980px){.public-data-showcase .context-cards,.public-facts,.guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.method-preview-flow{grid-template-columns:1fr}.method-preview-flow>i{transform:rotate(90deg)}.about-grid{grid-template-columns:240px 1fr;gap:26px}}
++@media(max-width:680px){.public-data-showcase .context-cards,.public-facts,.guide-grid{grid-template-columns:1fr}.context-band{align-items:flex-start;flex-direction:column}.about-grid{grid-template-columns:1fr}.about-photo-wrap{max-width:320px}.method-preview-flow{grid-template-columns:1fr}.topbar nav{overflow-x:auto;white-space:nowrap;max-width:62vw}}
+diff --git a/index.html b/index.html
+index d56d1ac..ad47da5 100644
+--- a/index.html
++++ b/index.html
+@@ -16,24 +16,54 @@
+       <span><b>U.S. Consolidation Observatory</b><small>Open empirical research</small></span>
+     </a>
+     <nav aria-label="Primary">
+-      <a href="#explorer">Explorer</a><a href="#workbench">Workbench</a><a href="#validation">Validation</a><a href="#replay">Replay</a><a href="#methodology">Methods</a><a href="#limitations">Limits</a>
++      <a href="#public-data">Public Data</a><a href="#guide">Guide</a><a href="#explorer">Explorer</a><a href="#validation">Validation</a><a href="#methodology">Methods</a><a href="#about">About</a>
+     </nav>
+     <button id="themeToggle" class="icon-btn" aria-label="Toggle color theme">◐</button>
+   </header>
+ 
+   <main id="main">
+     <section id="top" class="hero shell">
+-      <div class="eyebrow">Technical research platform · Version 0.2</div>
++      <div class="eyebrow">Technical research platform · Version 0.3</div>
+       <h1>Where does U.S. business structure create the strongest conditions for future consolidation?</h1>
+       <p class="lede">A transparent, reproducible research system for studying state-by-industry business structure, entry, exit, job creation, and dynamism — built from official public data, with point-in-time validation and explicit limits.</p>
+-      <div class="hero-actions"><a class="button primary" href="#explorer">Open the data explorer</a><a class="button" href="research/technical-paper.md">Open research preview</a><a class="button" href="MASTER_CHECKLIST.md">Audit release checklist</a></div>
++      <div class="hero-actions"><a class="button primary" href="#public-data">See the public data</a><a class="button" href="#guide">How to use this</a><a class="button" href="#explorer">Open explorer</a><a class="button" href="research/technical-paper.md">Research preview</a></div><div id="dataStatus" class="data-status" role="status">Public-data release · Census BDS through 2023 · interactive data loading…</div>
+       <div class="truth-banner"><b>Evidence boundary:</b> the current release validates forecasting infrastructure against future <em>establishment growth</em>. It does <b>not</b> yet claim validated prediction of M&amp;A transactions, investment returns, or company value.</div>
+       <div class="metric-grid" id="heroMetrics" aria-live="polite"></div>
+     </section>
+ 
+-    <section class="shell public-data-strip" aria-labelledby="publicDataTitle">
+-      <div><span class="eyebrow">Public-data context</span><h2 id="publicDataTitle">A real economic-data backbone, not demo numbers.</h2></div>
+-      <div class="context-cards" id="contextCards"></div>
++    <section id="public-data" class="shell section public-data-showcase" aria-labelledby="publicDataTitle">
++      <div class="section-head"><div><span class="eyebrow">Public-data showcase</span><h2 id="publicDataTitle">Real U.S. business data is the first thing you see.</h2><p>The Observatory is built on official federal statistics, not demo records. The cards below remain visible even if an interactive asset is temporarily unavailable.</p></div><div class="source-pill">Primary release · Census BDS 1978–2023</div></div>
++      <div class="context-cards" id="contextCards">
++        <div class="context-card"><b>44,574</b><span>state × sector × year observations in the research panel</span><a href="https://www.census.gov/programs-surveys/bds.html" target="_blank" rel="noreferrer">U.S. Census BDS ↗</a></div>
++        <div class="context-card"><b>51</b><span>states + District of Columbia covered</span><a href="https://www.census.gov/programs-surveys/bds.html" target="_blank" rel="noreferrer">Official source ↗</a></div>
++        <div class="context-card"><b>
