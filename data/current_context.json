@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "project": "U.S. Consolidation Observatory",
+  "as_of": "2026-08-23",
+  "policy": {
+    "principle": "Keep the historical research panel and the current-context layer separate unless a source can be integrated consistently in a point-in-time design.",
+    "srs_rule": "Only the Census BDS research panel feeds the current Structural Readiness Score. Newer context sources are not blended into SRS.",
+    "claim_boundary": "Current-context metrics are descriptive and sourced. They are not M&A forecasts, investment recommendations, or evidence of causality."
+  },
+  "sources": [
+    {
+      "id": "census_bds_2023",
+      "agency": "U.S. Census Bureau",
+      "product": "Business Dynamics Statistics (BDS)",
+      "latest_vintage": "2023",
+      "release_date": "2025-09-25",
+      "role": "Core longitudinal research panel and SRS inputs",
+      "used_in_srs": true,
+      "coverage_note": "Annual business-dynamics measures spanning 1978–2023 in the project release.",
+      "source_url": "https://www.census.gov/newsroom/press-releases/2025/business-dynamics-statistics.html"
+    },
+    {
+      "id": "bls_qcew_q4_2025",
+      "agency": "U.S. Bureau of Labor Statistics",
+      "product": "Quarterly Census of Employment and Wages (QCEW)",
+      "latest_vintage": "Q4 2025",
+      "release_date": "2026-06-02",
+      "role": "Current labor-market and wage context",
+      "used_in_srs": false,
+      "headline_metrics": {
+        "december_2025_employment": 156700000,
+        "employment_yoy_pct": 0.2,
+        "q4_2025_avg_weekly_wage_usd": 1569,
+        "avg_weekly_wage_yoy_pct": 4.2
+      },
+      "coverage_note": "QCEW covers more than 95 percent of U.S. jobs and publishes geography-by-industry employment and wage data.",
+      "source_url": "https://www.bls.gov/news.release/cewqtr.nr0.htm"
+    },
+    {
+      "id": "census_bfs_july_2026",
+      "agency": "U.S. Census Bureau",
+      "product": "Business Formation Statistics (BFS)",
+      "latest_vintage": "July 2026",
+      "release_date": "2026-08-12",
+      "role": "High-frequency business-formation pulse",
+      "used_in_srs": false,
+      "headline_metrics": {
+        "seasonally_adjusted_business_applications": 578926,
+        "business_applications_mom_pct": 8.1,
+        "projected_formations_within_4q": 29959,
+        "projected_formations_mom_pct": 0.7
+      },
+      "coverage_note": "Monthly national, regional, and state business-application and formation statistics.",
+      "source_url": "https://www.census.gov/econ/bfs/current/index.html"
+    },
+    {
+      "id": "bea_state_gdp_q1_2026",
+      "agency": "U.S. Bureau of Economic Analysis",
+      "product": "GDP by State",
+      "latest_vintage": "Q1 2026",
+      "release_date": "2026-06-25",
+      "role": "Current state macroeconomic context",
+      "used_in_srs": false,
+      "headline_metrics": {
+        "states_with_real_gdp_increase": 46,
+        "dc_increased": true,
+        "highest_state": "Washington",
+        "highest_annualized_pct": 4.5,
+        "lowest_state": "South Dakota",
+        "lowest_annualized_pct": -1.6
+      },
+      "source_url": "https://www.bea.gov/data/gdp/gdp-state"
+    },
+    {
+      "id": "census_cbp_2023",
+      "agency": "U.S. Census Bureau",
+      "product": "County Business Patterns (CBP)",
+      "latest_vintage": "2023",
+      "release_date": "2025-06-26",
+      "role": "Detailed geography-by-industry establishment, employment, and payroll enrichment",
+      "used_in_srs": false,
+      "status": "Registered for future systematic enrichment",
+      "source_url": "https://www.census.gov/data/datasets/2023/econ/cbp/2023-cbp.html"
+    },
+    {
+      "id": "sec_edgar",
+      "agency": "U.S. Securities and Exchange Commission",
+      "product": "EDGAR",
+      "latest_vintage": "Current filings",
+      "role": "Future transaction-evidence and acquisition-document source",
+      "used_in_srs": false,
+      "status": "Evidence source for the future verified M&A corpus; not a complete M&A universe by itself",
+      "source_url": "https://www.sec.gov/edgar/search-and-access"
+    }
+  ]
+}
