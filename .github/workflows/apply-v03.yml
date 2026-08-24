@@ -1,4 +1,4 @@
-name: Apply audited v0.3 website upgrade
+name: Finalize audited v0.3 release
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  upgrade:
+  finalize:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,18 +23,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Reconstruct and apply audited v0.3 patch
-        run: |
-          cat bootstrap/v03_patch_00 bootstrap/v03_patch_01 bootstrap/v03_patch_02 bootstrap/v03_patch_03 bootstrap/v03_patch_04 > /tmp/v03.patch
-          git apply --check /tmp/v03.patch
-          git apply /tmp/v03.patch
       - name: Install research dependencies
         run: python -m pip install -r requirements.txt
       - name: Download and verify official Census BDS source
         run: |
           curl -fsSL https://www2.census.gov/programs-surveys/bds/tables/time-series/2023/bds2023_st_sec.csv -o /tmp/bds2023_st_sec.csv
           echo "ba73f1ad58749d57f04c6bb56b0618c92384897a3e9f793de0df7b23f1f1868a  /tmp/bds2023_st_sec.csv" | sha256sum -c -
-      - name: Rebuild full research and browser release
+      - name: Rebuild research and self-contained viewer data
         env:
           BDS_SOURCE: /tmp/bds2023_st_sec.csv
         run: |
@@ -42,28 +37,28 @@ jobs:
           python scripts/run_score_sensitivity.py
           python scripts/build_advanced_diagnostics.py
           python scripts/build_site_bundle.py
-      - name: Validate JavaScript
+      - name: Materialize supplied About portrait
         run: |
-          node --check assets/app-core.js
-          node --check assets/app-ui.js
+          base64 -d assets/shriyan-about.b64 > assets/shriyan-about.jpg
+          test -s assets/shriyan-about.jpg
+      - name: Validate application
+        run: |
           node --check assets/app.js
-      - name: Run research and viewer audits
-        run: |
           python scripts/validate_release.py
           python scripts/end_to_end_audit.py
-      - name: Remove temporary upgrade bootstrap
+      - name: Remove temporary staging
         run: |
           rm -rf bootstrap
+          rm -f assets/about-photo-note.txt assets/shriyan-about.b64
           rm -f .github/workflows/apply-v03.yml
-      - name: Commit clean audited v0.3 release
+      - name: Commit clean final v0.3 release
         run: |
           git config user.name "SriBYJU"
           git config user.email "95580233+SriBYJU@users.noreply.github.com"
-          git add index.html assets/app-core.js assets/app-ui.js assets/styles.css \
-            scripts/build_site_bundle.py scripts/end_to_end_audit.py scripts/validate_release.py \
-            MASTER_CHECKLIST.md RELEASE_AUDIT.md \
-            .github/workflows/validate.yml .github/workflows/pages.yml \
-            data/site_data.json.gz data/site
-          git add -A bootstrap .github/workflows/apply-v03.yml
-          git commit -m "Upgrade Observatory to audited v0.3 public-data release"
+          git add index.html assets/app.js assets/styles.css assets/shriyan-about.jpg \
+            scripts/build_site_bundle.py scripts/end_to_end_audit.py \
+            data/site_data.json.gz data/site \
+            .github/workflows/validate.yml .github/workflows/pages.yml
+          git add -A bootstrap assets/about-photo-note.txt assets/shriyan-about.b64 .github/workflows/apply-v03.yml
+          git commit -m "Release v0.3: public-data UX, viewer data, guide, and About portrait"
           git push origin main
