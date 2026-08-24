@@ -7,7 +7,7 @@ The Observatory is designed around a simple standard: **data and falsifiable eva
 ## What is live in v0.2
 
 - Interactive state × sector explorer with 2014–2023 browser data.
-- Full 1978–2023 cleaned research panel (`data/bds_state_sector_panel.csv.gz`).
+- Full 1978–2023 cleaned research panel is deterministically rebuilt in CI from the official Census BDS source; generated artifacts are deployed to GitHub Pages rather than committed as opaque binaries.
 - Transparent exploratory Structural Readiness Score with component decomposition.
 - Point-in-time model lab with train/validation/holdout separation.
 - Persistence, Ridge, and Histogram Gradient Boosting comparisons.
@@ -32,20 +32,23 @@ The current model target is **two-year-ahead establishment growth**, not M&A act
 ```bash
 python -m pip install -r requirements.txt
 BDS_SOURCE=/path/to/bds2023_st_sec.csv python scripts/build_research_assets.py
+python scripts/run_score_sensitivity.py
 python scripts/build_advanced_diagnostics.py
+node --check assets/app-core.js
+node --check assets/app.js
 python scripts/validate_release.py
 python -m http.server 8000
 ```
 
 Open `http://localhost:8000`.
 
-The exact official source URL and source-file SHA-256 are stored in [`data/source_manifest.json`](data/source_manifest.json).
+The exact official source URL and expected source-file SHA-256 are documented in the build pipeline. CI verifies the downloaded Census file before generating derived artifacts.
 
 ## Repository structure
 
 ```text
 assets/                 Static app CSS + JavaScript
-data/                   Derived panel, browser data, validation outputs, provenance
+data/                   Small schemas/manifests tracked in Git; large derived artifacts are CI-generated
 research/               Methods, protocols, limits, paper/report drafts
 scripts/                Deterministic data build, modeling, and release validation
 .github/workflows/       Automated release-gate checks

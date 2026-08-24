@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="U.S. Consolidation Observatory — open, reproducible research on business structure, dynamism, and future consolidation signals." />
+  <meta name="theme-color" content="#0a1020" />
+  <title>U.S. Consolidation Observatory</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="U.S. Consolidation Observatory home">
+      <span class="mark">USCO</span>
+      <span><b>U.S. Consolidation Observatory</b><small>Open empirical research</small></span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="#explorer">Explorer</a><a href="#workbench">Workbench</a><a href="#validation">Validation</a><a href="#replay">Replay</a><a href="#methodology">Methods</a><a href="#limitations">Limits</a>
+    </nav>
+    <button id="themeToggle" class="icon-btn" aria-label="Toggle color theme">◐</button>
+  </header>
+
+  <main id="main">
+    <section id="top" class="hero shell">
+      <div class="eyebrow">Technical research platform · Version 0.2</div>
+      <h1>Where does U.S. business structure create the strongest conditions for future consolidation?</h1>
+      <p class="lede">A transparent, reproducible research system for studying state-by-industry business structure, entry, exit, job creation, and dynamism — built from official public data, with point-in-time validation and explicit limits.</p>
+      <div class="hero-actions"><a class="button primary" href="#explorer">Open the data explorer</a><a class="button" href="research/technical-paper.md">Open research preview</a><a class="button" href="MASTER_CHECKLIST.md">Audit release checklist</a></div>
+      <div class="truth-banner"><b>Evidence boundary:</b> the current release validates forecasting infrastructure against future <em>establishment growth</em>. It does <b>not</b> yet claim validated prediction of M&amp;A transactions, investment returns, or company value.</div>
+      <div class="metric-grid" id="heroMetrics" aria-live="polite"></div>
+    </section>
+
+    <section class="shell public-data-strip" aria-labelledby="publicDataTitle">
+      <div><span class="eyebrow">Public-data context</span><h2 id="publicDataTitle">A real economic-data backbone, not demo numbers.</h2></div>
+      <div class="context-cards" id="contextCards"></div>
+    </section>
+
+    <section id="explorer" class="shell section">
+      <div class="section-head"><div><span class="eyebrow">Structural atlas</span><h2>State × sector explorer</h2><p>Inspect official Census BDS measures and an exploratory Structural Readiness Score. Every score is decomposable into its inputs.</p></div><div class="source-pill">Primary source · U.S. Census BDS 2023</div></div>
+      <div class="control-panel">
+        <label>State<select id="stateSelect"></select></label>
+        <label>Sector<select id="sectorSelect"></select></label>
+        <label>Year<select id="yearSelect"></select></label>
+      </div>
+      <div class="kpi-grid" id="kpiGrid"></div>
+      <div class="two-col">
+        <article class="panel"><div class="panel-head"><div><h3>Historical trajectory</h3><p id="chartSubtitle"></p></div><div class="legend"><span><i class="dot score"></i>Structural score</span><span><i class="dot estabs"></i>Establishments (indexed)</span></div></div><svg id="historyChart" viewBox="0 0 760 330" role="img" aria-label="Historical structural score and establishment index chart"></svg></article>
+        <article class="panel"><h3>Score decomposition</h3><p>The score compares a market only with other states in the <b>same sector and year</b>.</p><div id="scoreBars" class="score-bars"></div><div class="formula-note">Exploratory weights: fragmentation 25% · entry 20% · job-creation momentum 20% · scale 15% · stability 10% · dynamism 10%.</div></article>
+      </div>
+      <div class="evidence-row">
+        <article class="panel evidence-card"><span class="eyebrow">Robustness</span><h3>How stable is this score?</h3><div id="sensitivityCard"></div></article>
+        <article class="panel evidence-card"><span class="eyebrow">Evidence export</span><h3>Take the market evidence with you.</h3><p>Generate a source-attributed Markdown snapshot of the selected market, including the score boundary and current metrics.</p><button class="button primary" id="exportBrief">Export evidence brief</button></article>
+      </div>
+      <article class="panel table-panel"><div class="panel-head"><div><h3>2023 structural leaderboard</h3><p>Filter and sort the full state-sector cross-section. High score ≠ investment recommendation.</p></div><input id="rankSearch" class="search" type="search" placeholder="Search state or sector…" aria-label="Search rankings" /></div><div class="table-wrap"><table><thead><tr><th>Rank</th><th>State</th><th>Sector</th><th>SRS</th><th>Firms</th><th>Establishments</th><th>Entry</th><th>Net job creation</th></tr></thead><tbody id="rankBody"></tbody></table></div></article>
+    </section>
+
+    <section id="workbench" class="shell section">
+      <div class="section-head"><div><span class="eyebrow">Practitioner workbench</span><h2>Compare, screen, and export evidence.</h2><p>Turn the research panel into repeatable market-screening workflows without hiding the assumptions behind a black box.</p></div><div class="badge">Deterministic · source-attributed</div></div>
+      <div class="two-col workbench-grid">
+        <article class="panel">
+          <div class="panel-head"><div><h3>Market comparator</h3><p>Compare three states for one sector and year on the same underlying measures.</p></div></div>
+          <div class="compare-controls"><label>Sector<select id="compareSector"></select></label><label>Year<select id="compareYear"></select></label><label>State A<select id="compareA"></select></label><label>State B<select id="compareB"></select></label><label>State C<select id="compareC"></select></label></div>
+          <div class="table-wrap"><table><thead><tr><th>Market</th><th>SRS</th><th>Firms</th><th>Entry</th><th>Exit</th><th>Net jobs</th><th>Firms / 1K emp.</th></tr></thead><tbody id="compareBody"></tbody></table></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><div><h3>2023 evidence screener</h3><p>Apply transparent thresholds rather than asking the system for a mysterious recommendation.</p></div><span id="screenCount" class="source-pill"></span></div>
+          <div class="screen-controls"><label>Sector<select id="screenSector"><option value="all">All sectors</option></select></label><label>Minimum SRS<input id="screenScore" type="range" min="0" max="90" value="65" step="1"><span id="screenScoreValue">65</span></label><label>Minimum entry rate<input id="screenEntry" type="range" min="0" max="20" value="5" step="0.5"><span id="screenEntryValue">5.0%</span></label><label>Minimum net job creation<input id="screenJobs" type="range" min="-5" max="15" value="0" step="0.5"><span id="screenJobsValue">0.0%</span></label></div>
+          <div class="screen-results" id="screenResults"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="validation" class="section dark-section">
+      <div class="shell">
+        <div class="section-head"><div><span class="eyebrow">Locked evaluation</span><h2>Point-in-time model lab</h2><p>The model is trained on earlier years, chosen on a validation period, and evaluated once on a later holdout. The holdout is never used to select the model.</p></div><div class="badge">No future leakage by construction</div></div>
+        <div class="validation-grid" id="validationCards"></div>
+        <article class="panel glass"><div class="panel-head"><div><h3>Model comparison</h3><p>Target: two-year-ahead annualized log establishment growth — deliberately not M&amp;A activity.</p></div></div><div class="table-wrap"><table><thead><tr><th>Model</th><th>Split</th><th>N</th><th>MAE ↓</th><th>Spearman ↑</th><th>Top-decile precision ↑</th></tr></thead><tbody id="validationBody"></tbody></table></div></article>
+        <div id="errorAnalysis" class="error-box"></div>
+      </div>
+    </section>
+
+    <section id="replay" class="shell section">
+      <div class="section-head"><div><span class="eyebrow">Historical replay & diagnostics</span><h2>Make the research prove itself against later observations.</h2><p>These are establishment-growth diagnostics only. They strengthen the evaluation architecture without being mislabeled as M&amp;A validation.</p></div><a class="button" href="research/model-card.md">Read model card</a></div>
+      <div class="finding-grid" id="findingCards"></div>
+      <div class="two-col replay-grid">
+        <article class="panel">
+          <div class="panel-head"><div><h3>SRS historical replay</h3><p>For a chosen historical year and sector, see the highest structural scores and what establishment growth actually occurred over the next two years.</p></div></div>
+          <div class="replay-controls"><label>Year<select id="replayYear"></select></label><label>Sector<select id="replaySector"></select></label></div>
+          <div class="table-wrap"><table><thead><tr><th>State</th><th>SRS at t</th><th>SRS pct.</th><th>Realized t→t+2 growth</th><th>Top quintile?</th></tr></thead><tbody id="replayBody"></tbody></table></div>
+        </article>
+        <article class="panel"><div class="panel-head"><div><h3>44-cohort uplift replay</h3><p>Difference in subsequent growth between the within-sector SRS top quintile and the remaining states.</p></div></div><svg id="upliftChart" viewBox="0 0 760 330" role="img" aria-label="Historical SRS top-quintile future growth uplift chart"></svg><div class="formula-note">Exploratory and post-hoc. A positive bar means top-quintile SRS markets had higher subsequent establishment growth in that annual cohort.</div></article>
+      </div>
+      <div class="two-col diagnostics-grid">
+        <article class="panel"><div class="panel-head"><div><h3>Rolling-origin robustness</h3><p>The fixed HGB specification is retrained using only data available before each historical test window.</p></div></div><div class="table-wrap"><table><thead><tr><th>Window</th><th>Model</th><th>MAE ↓</th><th>Spearman ↑</th><th>Top-decile ↑</th></tr></thead><tbody id="rollingBody"></tbody></table></div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Feature diagnostics</h3><p>Validation-period permutation importance: how much MAE worsens when one input is disrupted.</p></div></div><div id="featureBars" class="score-bars"></div><div class="formula-note">Post-selection diagnostic only; it does not rewrite the frozen holdout model.</div></article>
+      </div>
+    </section>
+
+    <section id="methodology" class="shell section">
+      <div class="section-head"><div><span class="eyebrow">Reproducible methodology</span><h2>Every transformation is inspectable.</h2></div><a class="button" href="research/methodology.md">Full methodology</a></div>
+      <div class="method-grid">
+        <article><span>01</span><h3>Source</h3><p>Official Census State × Sector Business Dynamics Statistics, with source checksum recorded in the repository.</p></article>
+        <article><span>02</span><h3>Suppressions</h3><p>Disclosure/suppression codes are converted to missing values — never silently treated as zero.</p></article>
+        <article><span>03</span><h3>Comparable ranks</h3><p>Structural inputs are percentile-ranked within each year and sector, preventing cross-industry scale differences from dominating.</p></article>
+        <article><span>04</span><h3>Prediction protocol</h3><p>Features at year <em>t</em> are used only to predict an outcome at <em>t+2</em>; train, validation, and holdout periods are separated.</p></article>
+        <article><span>05</span><h3>Baselines</h3><p>Complex models must compete against a simple persistence baseline; improvement is reported rather than assumed.</p></article>
+        <article><span>06</span><h3>Failure analysis</h3><p>Sector-level errors and weak performance are shown so users can see where the model is least reliable.</p></article>
+      </div>
+    </section>
+
+    <section id="reproducibility" class="section evidence-section">
+      <div class="shell">
+        <div class="section-head"><div><span class="eyebrow">Auditability</span><h2>Source → script → artifact → claim.</h2><p>The strongest version of this project should survive a skeptical technical interview. This section exposes the evidence chain instead of asking users to trust the interface.</p></div><a class="button" href="research/reproducibility.md">Rebuild guide</a></div>
+        <div class="lineage-grid"><article><b>1 · Source fingerprint</b><p id="sourceFingerprint"></p></article><article><b>2 · Deterministic pipeline</b><p>Versioned Python scripts build the panel, score, model evaluation, sensitivity runs, and diagnostics.</p></article><article><b>3 · Research artifacts</b><p id="artifactFingerprint"></p></article><article><b>4 · Falsifiable claims</b><p>Unsupported results remain visible; future M&amp;A hypotheses stay explicitly untested until transaction data exists.</p></article></div>
+        <div class="repro-links"><a class="button" href="research/hypothesis-registry.md">Claims & hypothesis registry</a><a class="button" href="research/model-card.md">Model card</a><a class="button" href="data/reproducibility_manifest.json">Machine-readable fingerprint</a></div>
+      </div>
+    </section>
+
+    <section id="sources" class="shell section">
+      <div class="section-head"><div><span class="eyebrow">Evidence registry</span><h2>Official public sources</h2><p>Each factual public-data statement links to the issuing agency. Research-derived statements are traceable to versioned scripts and outputs.</p></div></div>
+      <div class="source-grid" id="sourceGrid"></div>
+    </section>
+
+    <section class="shell section" id="query">
+      <div class="section-head"><div><span class="eyebrow">Evidence query</span><h2>Ask the local dataset</h2><p>This deterministic local tool is intentionally <b>not branded as AI</b>. It answers only from the loaded Census panel; an evaluated LLM extraction system belongs to the next research milestone.</p></div></div>
+      <article class="panel query-panel"><label for="queryInput">Try “Virginia construction”, “Texas professional services”, or “top construction”</label><div class="query-row"><input id="queryInput" placeholder="Ask a state/sector question…" /><button class="button primary" id="queryButton">Analyze</button></div><div id="queryAnswer" class="query-answer" aria-live="polite"></div></article>
+    </section>
+
+    <section id="limitations" class="section limit-section">
+      <div class="shell"><span class="eyebrow">Research integrity</span><h2>What this release does not prove</h2><div class="limit-grid"><article><h3>No M&amp;A causality yet</h3><p>BDS measures business dynamics, not acquisitions. Transaction-level validation must be added before any claim that the model predicts consolidation events.</p></article><article><h3>Fragmentation is a proxy</h3><p>Firms per 1,000 employees is useful for structural comparison but does not equal a market-share concentration measure such as HHI.</p></article><article><h3>Public-data publication lags</h3><p>The latest BDS release currently covers through 2023. The platform timestamps data vintages so later releases can be replayed honestly.</p></article><article><h3>Not investment advice</h3><p>The score does not evaluate price, leverage, cash flow, management quality, deal terms, or expected returns.</p></article></div></div>
+    </section>
+
+    <section class="shell section forecast-ledger">
+      <span class="eyebrow">Immutable forecast ledger</span><h2>No M&amp;A forecast has been issued yet.</h2><p>That is deliberate. The repository contains the forecast protocol and schema, but a future consolidation forecast will only be frozen and timestamped after a sufficiently verified transaction-outcome corpus passes the research milestone gate.</p><a class="button" href="research/forecast-protocol.md">View forecast protocol</a>
+    </section>
+  </main>
+
+  <footer><div class="shell footer-inner"><div><b>U.S. Consolidation Observatory</b><p>Technical platform v0.2 · data and methods before marketing.</p></div><div><a href="README.md">README</a><a href="MASTER_CHECKLIST.md">Release audit</a><a href="RESEARCH_MILESTONES.md">Research milestones</a><a href="research/limitations.md">Limitations</a></div></div></footer>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

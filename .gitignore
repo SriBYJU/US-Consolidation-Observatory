@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.DS_Store
+raw/
+
+# Deterministically generated research artifacts (rebuilt in CI / Pages)
+data/bds_state_sector_panel.csv.gz
+data/panel_2014_2023.json
+data/latest_2023.json
+data/replay_2014_2021.json
+data/score_sensitivity_2023.json
+data/research_diagnostics.json
+data/reproducibility_manifest.json
