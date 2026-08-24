@@ -1,0 +1,63 @@
+name: Finalize v0.3 release branch
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'finalize-v03'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt
+      - name: Download and verify official Census BDS source
+        run: |
+          curl -fsSL https://www2.census.gov/programs-surveys/bds/tables/time-series/2023/bds2023_st_sec.csv -o /tmp/bds2023_st_sec.csv
+          echo "ba73f1ad58749d57f04c6bb56b0618c92384897a3e9f793de0df7b23f1f1868a  /tmp/bds2023_st_sec.csv" | sha256sum -c -
+      - name: Build complete research and browser release
+        env:
+          BDS_SOURCE: /tmp/bds2023_st_sec.csv
+        run: |
+          python scripts/build_research_assets.py
+          python scripts/run_score_sensitivity.py
+          python scripts/build_advanced_diagnostics.py
+          python scripts/build_site_bundle.py
+      - name: Materialize supplied About portrait
+        run: |
+          if [ -f assets/shriyan-about.b64 ]; then base64 -d assets/shriyan-about.b64 > assets/shriyan-about.jpg; fi
+          test -s assets/shriyan-about.jpg
+      - name: Run syntax and end-to-end audits
+        run: |
+          node --check assets/app.js
+          python scripts/validate_release.py
+          python scripts/end_to_end_audit.py
+      - name: Clean temporary release staging
+        run: |
+          rm -rf bootstrap
+          rm -f .finalize-v03-trigger assets/about-photo-note.txt assets/shriyan-about.b64
+          rm -f .github/workflows/apply-v03.yml .github/workflows/finalize-v03-pr.yml
+      - name: Commit generated audited release to PR branch
+        run: |
+          git config user.name "SriBYJU"
+          git config user.email "95580233+SriBYJU@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Release branch already matches generated audited output."
+          else
+            git commit -m "Finalize audited v0.3 public release"
+            git push origin HEAD:finalize-v03
+          fi
