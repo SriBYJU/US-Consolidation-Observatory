@@ -50,7 +50,7 @@ check('“top construction” query can return five sourced rows',len(constructi
 rep=[r for r in replay if r['year']==2021 and r['sector']=='23' and r.get('structural_readiness_score') is not None]
 check('Default historical replay resolves 2021 Construction rows',len(rep)>=40,str(len(rep)))
 check('Default market has 2023 sensitivity result',any(r['st']=='51' and r['sector']=='23' for r in sens))
-check('Validation table has multiple models',len(research['validation']['metrics'])>=6,str(len(research['validation']['metrics']))
+check('Validation table has multiple models',len(research['validation']['metrics'])>=6,str(len(research['validation']['metrics'])))
 check('Rolling-origin table has eight model/window rows',len(research['diagnostics']['rolling_origin']['windows'])==8)
 check('Feature diagnostics expose eight features',len(research['diagnostics']['feature_diagnostics']['permutation_importance'])==8)
 

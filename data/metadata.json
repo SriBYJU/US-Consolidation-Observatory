@@ -4,7 +4,7 @@
   "panel_rows": 44574,
   "jurisdictions": 51,
   "sectors": 19,
-  "years": "1978–2023",
+  "years": "1978\u20132023",
   "latest_year": 2023,
   "qcew_2024": {
     "establishments": 12057371,
@@ -15,7 +15,7 @@
   "bea_q1_2026": {
     "states_plus_dc_growth": 47,
     "highest": "Washington +4.5%",
-    "lowest": "South Dakota −1.6%",
+    "lowest": "South Dakota \u22121.6%",
     "release": "June 25, 2026",
     "source": "https://www.bea.gov/data/gdp/gdp-state"
   },
