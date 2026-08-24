@@ -1,4 +1,4 @@
-# Master Release Checklist — v0.2
+# Master Release Checklist — v0.4
 
 **Rule:** every item in this file is a push/release gate. Items requiring future human data collection, external reviewers, professional adoption, or external recognition live separately in `RESEARCH_MILESTONES.md` so the project never pretends they already happened.
 
@@ -31,12 +31,17 @@
 ## C. Public-data context and source validation
 
 - [x] BDS primary-source description linked to U.S. Census Bureau.
-- [x] BLS QCEW official 2024 context data shown with source link.
-- [x] BEA GDP-by-State official source registered.
-- [x] Census County Business Patterns official source registered for planned enrichment.
-- [x] Census Nonemployer Statistics official source registered for planned enrichment.
+- [x] BDS release explicitly identified as the 2023 reference-year release.
+- [x] BLS QCEW Q4 2025 current labor context shown with official source link.
+- [x] Census Business Formation Statistics July 2026 current formation context shown with official source link.
+- [x] BEA GDP-by-State Q1 2026 current macro context shown with official source link.
+- [x] Census County Business Patterns official source registered for detailed enrichment.
 - [x] SEC EDGAR official source registered for future transaction-corpus evidence.
-- [x] Public-data claims are visually separated from research-derived model claims.
+- [x] Machine-readable current-context source registry implemented in `data/current_context.json`.
+- [x] Source governance and data-freshness policy documented in `research/source-governance.md`.
+- [x] Each current-context source records agency, vintage, role, official URL, and SRS-use flag.
+- [x] Current-context facts are visually separated from historical research-derived model claims.
+- [x] Newer QCEW/BFS/BEA context is explicitly **not blended into SRS**.
 
 ## D. Structural research layer
 
@@ -119,6 +124,10 @@
 
 - [x] Professional homepage and research framing implemented.
 - [x] Public-data headline metrics implemented.
+- [x] Current Context section implemented with dated federal releases.
+- [x] Data freshness matrix implemented.
+- [x] Machine-readable current-source registry linked from the interface.
+- [x] Source-governance documentation linked from the interface.
 - [x] State selector implemented.
 - [x] Sector selector implemented.
 - [x] Year selector implemented.
@@ -150,12 +159,14 @@
 - [x] Transaction schema implemented.
 - [x] AI benchmark protocol implemented.
 - [x] Reviewer-response log implemented and truthfully states no outside review yet.
+- [x] Source-governance / freshness document implemented.
 - [x] Future research/adoption milestones separated into `RESEARCH_MILESTONES.md`.
 
 ## L. Claim / credibility QA
 
 - [x] No claim that the project predicts investment returns.
 - [x] No claim that high SRS means “buy this market.”
+- [x] No claim that current-context data changes the validated SRS.
 - [x] No claim that an external professional has adopted the tool yet.
 - [x] No claim that professors reviewed the work yet.
 - [x] No fake user counts, citations, awards, publications, or transaction counts.
@@ -163,10 +174,12 @@
 - [x] Public statements link to official issuing agencies where appropriate.
 - [x] Research-derived numbers are generated from committed scripts/artifacts.
 - [x] Failure/weakness information is visible, not buried.
+- [x] Mixed source vintages are explicitly disclosed rather than presented as one timestamp.
 
 ## M. Automated release checks
 
 - [x] `scripts/validate_release.py` implemented.
+- [x] `scripts/end_to_end_audit.py` implemented.
 - [x] Required-file checks implemented.
 - [x] Panel row/coverage/duplicate checks implemented.
 - [x] Score-bound checks implemented.
@@ -181,6 +194,9 @@
 - [x] Official-source-domain checks implemented.
 - [x] Accessibility/static-asset checks implemented.
 - [x] Placeholder/overclaim checks implemented.
+- [x] Current Context anchor and freshness-matrix checks implemented.
+- [x] Current-context registry source/vintage checks implemented.
+- [x] Mixed-vintage / SRS separation check implemented.
 - [x] GitHub Actions validation workflow implemented.
 
 ## N. Pre-push final gate
@@ -188,11 +204,11 @@
 - [x] Python research asset build completes successfully.
 - [x] Sensitivity build completes successfully.
 - [x] Release validator passes all gates.
+- [x] End-to-end application audit passes all gates.
 - [x] JavaScript syntax check passes.
 - [x] Local HTTP smoke test loads app and all data assets with HTTP 200.
-- [x] Project ZIP generated from the exact audited release tree.
+- [x] Project ZIP generated from the exact audited release tree when a packaged release is needed.
 - [x] No unrelated existing GitHub repository is overwritten to work around repository-creation limitations.
-
 
 ## O. Highest-category technical elevation — v0.2
 
@@ -229,3 +245,21 @@
 - [x] Feature diagnostics are directly inspectable in the public UI.
 - [x] Reproducibility evidence chain is directly inspectable in the public UI.
 - [x] Final flagship M&A report remains separated as a real future research milestone rather than fabricated now.
+
+## Q. Current-data credibility elevation — v0.4
+
+- [x] Current Context promoted to a first-class app section rather than a buried footnote.
+- [x] Latest Census BFS release available as of the v0.4 audit is represented: July 2026, released August 12, 2026.
+- [x] BFS headline values independently checked against the official Census release: 578,926 applications; +8.1% month over month; 29,959 projected formations within four quarters; +0.7% month over month.
+- [x] Latest completed QCEW quarterly context used in the v0.4 audit is represented: Q4 2025, released June 2, 2026.
+- [x] QCEW headline values independently checked against the official BLS release: 156.7M December employment; +0.2% year over year; $1,569 Q4 average weekly wage; +4.2% year over year.
+- [x] BEA Q1 2026 GDP-by-State context represented with official June 25, 2026 release.
+- [x] BEA headline range independently checked: Washington +4.5% to South Dakota −1.6%, with 46 states + D.C. increasing.
+- [x] Census CBP 2023 registered for detailed geography × industry enrichment without pretending it is already part of SRS.
+- [x] SEC EDGAR registered as future transaction evidence without pretending it is a complete M&A universe.
+- [x] Every current-context headline fact links to an official federal source.
+- [x] Machine-readable registry records an explicit `used_in_srs` flag for every source.
+- [x] Website explicitly states that newer context is not blended into SRS.
+- [x] Website explicitly explains why mixing 2025/2026 context into a 2023 historical score would weaken point-in-time validity.
+- [x] README, metadata, source registry, public UI, and source-governance documentation agree on the evidence-layer architecture.
+- [x] End-to-end audit expanded to cover the new source-freshness layer.
