@@ -1,0 +1,43 @@
+ssList.add('ready');
+ }
+ 
+ function renderStatic(){
+- $('#heroMetrics').innerHTML=[['44,574','state-sector-year observations'],['51','states + D.C.'],['19','NAICS sectors'],['1978–2023','official BDS history']].map(x=>`<div class="metric"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
+- const q=META.qcew_2024;
+- $('#contextCards').innerHTML=[[`12.06M`,'2024 QCEW covered establishments',q.source],[`155.0M`,'2024 QCEW average employment',q.source],[`$11.71T`,'2024 QCEW total wages',q.source]].map(x=>`<div class="context-card"><b>${x[0]}</b><span>${x[1]}</span><a href="${x[2]}" target="_blank" rel="noreferrer">Official BLS source ↗</a></div>`).join('');
++ renderStaticScaffold();
++ const construction=LATEST.filter(r=>r.sector==='23'&&r.structural_readiness_score!=null).sort((a,b)=>b.structural_readiness_score-a.structural_readiness_score)[0];
++ if(construction){$('#spotlightValue').textContent=`${construction.state_name} · ${construction.structural_readiness_score.toFixed(1)}`;$('#spotlightText').textContent=`Highest 2023 Structural Readiness Score in the Construction state cross-section; ${fmt(construction.estabs)} establishments and ${pct(construction.estabs_entry_rate)} entry rate.`;$('#spotlightSource').textContent='Derived from U.S. Census BDS 2023 · descriptive, not investment advice';}
+  $('#sourceGrid').innerHTML=sources.map(s=>`<article class="source-card"><span class="status">${s.status}</span><h3>${s.name}</h3><p><b>${s.agency}</b><br>${s.desc}</p><a href="${s.url}" target="_blank" rel="noreferrer">Open official source ↗</a></article>`).join('');
+  const h=VALID.selected_holdout, base=VALID.metrics.find(x=>x.model==='Persistence baseline'&&x.split==='holdout');
+  $('#validationCards').innerHTML=[['1990–2016','Training period'],['2017–2019','Model-selection validation'],['2020–2021','Locked holdout feature years'],[`${h.n.toLocaleString()}`,'Holdout observations']].map(x=>`<div class="validation-card"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
+diff --git a/assets/app-ui.js b/assets/app-ui.js
+index 7abb831..feb2812 100644
+--- a/assets/app-ui.js
++++ b/assets/app-ui.js
+@@ -1,4 +1,4 @@
+-function renderRanking(){const q=$('#rankSearch').value.toLowerCase().trim();let rows=LATEST.filter(r=>r.structural_readiness_score!=null);if(q)rows=rows.filter(r=>(r.state_name+' '+r.sector_name).toLowerCase().includes(q));rows=rows.slice(0,40);$('#rankBody').innerHTML=rows.map((r,i)=>`<tr><td>${i+1}</td><td><b>${r.state_name}</b></td><td>${r.sector_name}</td><td><span class="score-chip">${r.structural_readiness_score.toFixed(1)}</span></td><td>${fmt(r.firms)}</td><td>${fmt(r.estabs)}</td><td>${pct(r.estabs_entry_rate)}</td><td>${pct(r.net_job_creation_rate)}</td></tr>`).join('')}
++function renderRanking(){const q=$('#rankSearch').value.toLowerCase().trim();let rows=LATEST.filter(r=>r.structural_readiness_score!=null).sort((a,b)=>b.structural_readiness_score-a.structural_readiness_score);if(q)rows=rows.filter(r=>(r.state_name+' '+r.sector_name).toLowerCase().includes(q));rows=rows.slice(0,40);$('#rankBody').innerHTML=rows.map((r,i)=>`<tr><td>${i+1}</td><td><b>${r.state_name}</b></td><td>${r.sector_name}</td><td><span class="score-chip">${r.structural_readiness_score.toFixed(1)}</span></td><td>${fmt(r.firms)}</td><td>${fmt(r.estabs)}</td><td>${pct(r.estabs_entry_rate)}</td><td>${pct(r.net_job_creation_rate)}</td></tr>`).join('')}
+ 
+ function renderCompare(){
+  const sector=$('#compareSector').value, year=+$('#compareYear').value, ids=['compareA','compareB','compareC'].map(id=>$('#'+id).value);
+@@ -55,6 +55,6 @@ function exportMarketBrief(){
+  const blob=new Blob([text],{type:'text/markdown'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`USCO_${r.state_name.replace(/\W+/g,'-')}_${r.sector.replace(/[^0-9-]/g,'')}_${r.year}.md`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ }
+ 
+-function runQuery(){const q=$('#queryInput').value.toLowerCase().trim();if(!q){$('#queryAnswer').textContent='Enter a state, sector, or “top <sector>”.';return}const states=[...new Map(LATEST.map(r=>[r.st,r.state_name]))],sectors=[...new Map(LATEST.map(r=>[r.sector,r.sector_name]))];const sm=states.find(([,n])=>q.includes(n.toLowerCase())),sec=sectors.find(([,n])=>q.includes(n.toLowerCase())||n.toLowerCase().split(/[,&]/)[0].trim().split(' ').some(w=>w.length>7&&q.includes(w)));let rows=LATEST.filter(r=>r.structural_readiness_score!=null);if(sm)rows=rows.filter(r=>r.st===sm[0]);if(sec)rows=rows.filter(r=>r.sector===sec[0]);if(q.startsWith('top')&&sec)rows=LATEST.filter(r=>r.sector===sec[0]&&r.structural_readiness_score!=null).slice(0,5);if(!rows.length){$('#queryAnswer').innerHTML='No confident match. Try an exact state plus a broad sector name such as <b>Virginia construction</b>.';return}const top=rows.slice(0,5);$('#queryAnswer').innerHTML=top.map((r,i)=>`<div><b>${i+1}. ${r.state_name} — ${r.sector_name}</b>: SRS ${r.structural_readiness_score.toFixed(1)}, ${fmt(r.firms)} firms, ${pct(r.estabs_entry_rate)} entry rate, ${pct(r.net_job_creation_rate)} net job creation. <small>Source: Census BDS 2023.</small></div>`).join('<hr>')}
++function runQuery(){const q=$('#queryInput').value.toLowerCase().trim();if(!q){$('#queryAnswer').textContent='Enter a state, sector, or “top <sector>”.';return}const states=[...new Map(LATEST.map(r=>[r.st,r.state_name]))],sectors=[...new Map(LATEST.map(r=>[r.sector,r.sector_name]))];const sm=states.find(([,n])=>q.includes(n.toLowerCase())),sec=sectors.find(([,n])=>q.includes(n.toLowerCase())||n.toLowerCase().split(/[,&]/)[0].trim().split(' ').some(w=>w.length>7&&q.includes(w)));let rows=LATEST.filter(r=>r.structural_readiness_score!=null).sort((a,b)=>b.structural_readiness_score-a.structural_readiness_score);if(sm)rows=rows.filter(r=>r.st===sm[0]);if(sec)rows=rows.filter(r=>r.sector===sec[0]);if(q.startsWith('top')&&sec)rows=LATEST.filter(r=>r.sector===sec[0]&&r.structural_readiness_score!=null).slice(0,5);if(!rows.length){$('#queryAnswer').innerHTML='No confident match. Try an exact state plus a broad sector name such as <b>Virginia construction</b>.';return}const top=rows.slice(0,5);$('#queryAnswer').innerHTML=top.map((r,i)=>`<div><b>${i+1}. ${r.state_name} — ${r.sector_name}</b>: SRS ${r.structural_readiness_score.toFixed(1)}, ${fmt(r.firms)} firms, ${pct(r.estabs_entry_rate)} entry rate, ${pct(r.net_job_creation_rate)} net job creation. <small>Source: Census BDS 2023.</small></div>`).join('<hr>')}
+ 
+-load().catch(e=>{console.error(e);document.body.insertAdjacentHTML('afterbegin','<div style="padding:12px;background:#fee2e2;color:#7f1d1d">Data failed to load. Serve this folder over HTTP (for example, GitHub Pages) rather than opening index.html directly.</div>')});
++load().catch(e=>{console.error(e);renderStaticScaffold();$('#dataStatus').textContent='Interactive dataset unavailable · public-source facts and documentation remain available';$('#dataStatus').classList.add('error');document.body.insertAdjacentHTML('afterbegin','<div class="data-error-banner"><b>Interactive data could not initialize.</b> The public-data facts, guide, methodology, sources, and About section remain available. Refresh once; if this persists, check the repository release status.</div>')});
+diff --git a/assets/styles.css b/assets/styles.css
+index dd58c42..26bd68a 100644
+--- a/assets/styles.css
++++ b/assets/styles.css
+@@ -7,3 +7,34 @@
+ @media(max-width:1050px){.compare-controls{grid-template-columns:repeat(2,1fr)}.finding-grid,.lineage-grid{grid-template-columns:repeat(2,1fr)}}
+ @media(max-width:900px){.evidence-row,.workbench-grid{grid-template-columns:1fr}}
+ @media(max-width:560px){.evidence-row,.finding-grid,.lineage-grid,.compare-controls,.replay-controls{grid-template-columns:1fr}.robust-metrics{grid-template-columns:1fr}}
++
++/* v0.3 public-data / guide / about upgrades */
++.data-status{display:inline-flex;align-items:center;gap:.5rem;margin-top:14px;padding:8px 12px;border:1px solid var(--li
