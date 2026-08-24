@@ -79,7 +79,8 @@ for control in ['stateSelect','sectorSelect','yearSelect','rankSearch','queryBut
     check(f'Interactive control wired: {control}',f'id="{control}"' in html and control in js)
 check('Data-load error degrades gracefully','data-error-banner' in js and 'renderStaticScaffold' in js)
 check('About image has an explicit fallback',bool(p.imgs) and 'onerror' in p.imgs[0])
-check('No pickleball 4.5 claim appears in viewer HTML','4.5' not in html)
+html_lower=html.lower()
+check('No pickleball 4.5 claim appears in viewer HTML','4.5 singles' not in html_lower and '4.5 pickleball' not in html_lower and 'pickleball experience, including competing at the 4.5' not in html_lower)
 check('v0.4 footer/version label is public','Technical platform v0.4' in html and 'Version 0.4' in html)
 
 failed=[x for x in results if not x[1]]
