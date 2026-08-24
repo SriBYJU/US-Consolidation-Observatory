@@ -16,23 +16,23 @@
       <span><b>U.S. Consolidation Observatory</b><small>Open empirical research</small></span>
     </a>
     <nav aria-label="Primary">
-      <a href="#public-data">Public Data</a><a href="#guide">Guide</a><a href="#explorer">Explorer</a><a href="#validation">Validation</a><a href="#methodology">Methods</a><a href="#about">About</a>
+      <a href="#public-data">Public Data</a><a href="#current-context">Current Context</a><a href="#guide">Guide</a><a href="#explorer">Explorer</a><a href="#validation">Validation</a><a href="#methodology">Methods</a><a href="#about">About</a>
     </nav>
     <button id="themeToggle" class="icon-btn" aria-label="Toggle color theme">◐</button>
   </header>
 
   <main id="main">
     <section id="top" class="hero shell">
-      <div class="eyebrow">Technical research platform · Version 0.3</div>
+      <div class="eyebrow">Technical research platform · Version 0.4</div>
       <h1>Where does U.S. business structure create the strongest conditions for future consolidation?</h1>
       <p class="lede">A transparent, reproducible research system for studying state-by-industry business structure, entry, exit, job creation, and dynamism — built from official public data, with point-in-time validation and explicit limits.</p>
-      <div class="hero-actions"><a class="button primary" href="#public-data">See the public data</a><a class="button" href="#guide">How to use this</a><a class="button" href="#explorer">Open explorer</a><a class="button" href="research/technical-paper.md">Research preview</a></div><div id="dataStatus" class="data-status" role="status">Public-data release · Census BDS through 2023 · interactive data loading…</div>
+      <div class="hero-actions"><a class="button primary" href="#public-data">See the public data</a><a class="button" href="#current-context">See current context</a><a class="button" href="#guide">How to use this</a><a class="button" href="#explorer">Open explorer</a><a class="button" href="research/technical-paper.md">Research preview</a></div><div id="dataStatus" class="data-status" role="status">Core research · Census BDS through 2023 · current federal context through July 2026 · interactive data loading…</div>
       <div class="truth-banner"><b>Evidence boundary:</b> the current release validates forecasting infrastructure against future <em>establishment growth</em>. It does <b>not</b> yet claim validated prediction of M&amp;A transactions, investment returns, or company value.</div>
       <div class="metric-grid" id="heroMetrics" aria-live="polite"></div>
     </section>
 
     <section id="public-data" class="shell section public-data-showcase" aria-labelledby="publicDataTitle">
-      <div class="section-head"><div><span class="eyebrow">Public-data showcase</span><h2 id="publicDataTitle">Real U.S. business data is the first thing you see.</h2><p>The Observatory is built on official federal statistics, not demo records. The cards below remain visible even if an interactive asset is temporarily unavailable.</p></div><div class="source-pill">Primary release · Census BDS 1978–2023</div></div>
+      <div class="section-head"><div><span class="eyebrow">Public-data showcase</span><h2 id="publicDataTitle">Real U.S. business data is the first thing you see.</h2><p>The Observatory is built on official federal statistics, not demo records. The cards below remain visible even if an interactive asset is temporarily unavailable.</p></div><div class="source-pill">Core research release · Census BDS 1978–2023</div></div>
       <div class="context-cards" id="contextCards">
         <div class="context-card"><b>44,574</b><span>state × sector × year observations in the research panel</span><a href="https://www.census.gov/programs-surveys/bds.html" target="_blank" rel="noreferrer">U.S. Census BDS ↗</a></div>
         <div class="context-card"><b>51</b><span>states + District of Columbia covered</span><a href="https://www.census.gov/programs-surveys/bds.html" target="_blank" rel="noreferrer">Official source ↗</a></div>
@@ -45,17 +45,39 @@
         <article class="panel public-fact"><span class="eyebrow">2023 health care</span><b>21.998M</b><p>employees represented in Health Care &amp; Social Assistance.</p><small>Derived from Census BDS State × Sector data.</small></article>
         <article class="panel public-fact"><span class="eyebrow">Live release spotlight</span><b id="spotlightValue">Loading…</b><p id="spotlightText">The interactive release will surface a sourced 2023 market fact here.</p><small id="spotlightSource">Census BDS</small></article>
       </div>
-      <div class="context-band"><div><b>2024 QCEW context</b><span>12.06M covered establishments · 155.0M average employment · $11.71T total wages</span></div><a href="https://www.bls.gov/cew/publications/employment-and-wages-annual-averages/2024/" target="_blank" rel="noreferrer">Official BLS source ↗</a></div>
+      <div class="context-band"><div><b>Two-layer evidence design</b><span>Historical BDS research stays point-in-time clean while newer QCEW, BFS, and BEA releases provide a separately labeled current view.</span></div><a href="#current-context">Open current context ↓</a></div>
+    </section>
+
+    <section id="current-context" class="shell section" aria-labelledby="currentContextTitle">
+      <div class="section-head"><div><span class="eyebrow">Current market context</span><h2 id="currentContextTitle">Fresh federal releases without contaminating the historical score.</h2><p>The Observatory now separates the reproducible BDS research layer from a fresher context layer. Newer data help describe the present, but they are <b>not blended into SRS</b> unless they can be integrated under the same point-in-time rules.</p></div><div class="source-pill">Freshness layer · through July 2026</div></div>
+      <div class="public-facts">
+        <article class="panel public-fact"><span class="eyebrow">Census BFS · July 2026</span><b>578,926</b><p>seasonally adjusted U.S. business applications, up 8.1% from June 2026.</p><small>Projected formations within four quarters: 29,959, up 0.7% month over month.</small><a href="https://www.census.gov/econ/bfs/current/index.html" target="_blank" rel="noreferrer">Official Census source ↗</a></article>
+        <article class="panel public-fact"><span class="eyebrow">BLS QCEW · Q4 2025</span><b>156.7M</b><p>U.S. employment in December 2025, up 0.2% from December 2024.</p><small>Q4 2025 average weekly wage: $1,569, up 4.2% year over year.</small><a href="https://www.bls.gov/news.release/cewqtr.nr0.htm" target="_blank" rel="noreferrer">Official BLS source ↗</a></article>
+        <article class="panel public-fact"><span class="eyebrow">BEA · Q1 2026</span><b>46 + D.C.</b><p>states with increasing real GDP in the first quarter of 2026.</p><small>Range: Washington +4.5% to South Dakota −1.6% at annual rates.</small><a href="https://www.bea.gov/data/gdp/gdp-state" target="_blank" rel="noreferrer">Official BEA source ↗</a></article>
+        <article class="panel public-fact"><span class="eyebrow">Source architecture</span><b>6 sources</b><p>Core research, labor pulse, business formation, state macro, detailed industry geography, and future transaction evidence.</p><small>Every source has a role, vintage, official URL, and SRS-use flag.</small><a href="data/current_context.json">Machine-readable registry ↗</a></article>
+      </div>
+      <article class="panel table-panel" id="freshnessMatrix">
+        <div class="panel-head"><div><h3>Data freshness matrix</h3><p>What each source contributes — and whether it is allowed to affect the current Structural Readiness Score.</p></div><a class="button" href="research/source-governance.md">Source governance</a></div>
+        <div class="table-wrap"><table><thead><tr><th>Source</th><th>Latest vintage shown</th><th>Role</th><th>Used in SRS?</th></tr></thead><tbody>
+          <tr><td><b>Census BDS</b></td><td>2023</td><td>Core longitudinal state × sector research panel</td><td>Yes</td></tr>
+          <tr><td><b>BLS QCEW</b></td><td>Q4 2025</td><td>Current employment and wage pulse</td><td>No — context only</td></tr>
+          <tr><td><b>Census BFS</b></td><td>July 2026</td><td>High-frequency business formation pulse</td><td>No — context only</td></tr>
+          <tr><td><b>BEA GDP by State</b></td><td>Q1 2026</td><td>Current state macroeconomic momentum</td><td>No — context only</td></tr>
+          <tr><td><b>Census CBP</b></td><td>2023</td><td>Detailed geography × industry enrichment</td><td>No — registered enrichment</td></tr>
+          <tr><td><b>SEC EDGAR</b></td><td>Current filings</td><td>Future verified transaction-evidence source</td><td>No</td></tr>
+        </tbody></table></div>
+      </article>
+      <div class="guide-callout"><b>Why this matters:</b> the platform can be current <em>and</em> methodologically honest. A 2023 score remains a 2023 score, while newer official releases tell you what has happened since then. That prevents mixed-vintage leakage and makes the evidence chain easier to defend.</div>
     </section>
 
     <section id="guide" class="section guide-section">
       <div class="shell">
         <div class="section-head"><div><span class="eyebrow">Start here</span><h2>A 60-second guide to the Observatory.</h2><p>You should not need to understand the model before you can use the site. Follow these four steps.</p></div><a class="button" href="#methodology">Jump to methodology</a></div>
         <div class="guide-grid">
-          <article><span>01</span><h3>Start with public data</h3><p>Use the front-page facts to understand the scale and vintage of the official Census/BLS evidence.</p></article>
+          <article><span>01</span><h3>Start with the evidence layers</h3><p>Use Public Data for the BDS research panel, then Current Context for newer QCEW, BFS, and BEA releases.</p></article>
           <article><span>02</span><h3>Explore a market</h3><p>Select a state, sector, and year. Read the raw measures first; treat SRS as a transparent summary, not a recommendation.</p></article>
           <article><span>03</span><h3>Challenge the model</h3><p>Open Validation and Replay to see baselines, holdout performance, historical windows, failures, and uncertainty.</p></article>
-          <article><span>04</span><h3>Trace the evidence</h3><p>Use Methodology, Sources, the model card, and reproducibility fingerprint to see where every major claim comes from.</p></article>
+          <article><span>04</span><h3>Trace the evidence</h3><p>Use Methodology, Sources, source governance, the model card, and reproducibility fingerprints to see where every major claim comes from.</p></article>
         </div>
         <div class="guide-callout"><b>Important:</b> the current validated target is future <em>establishment growth</em>, not M&amp;A transactions. The site deliberately separates what the data proves today from what the future transaction-level report will test.</div>
       </div>
@@ -136,6 +158,7 @@
         <article><span>04</span><h3>Prediction protocol</h3><p>Features at year <em>t</em> are used only to predict an outcome at <em>t+2</em>; train, validation, and holdout periods are separated.</p></article>
         <article><span>05</span><h3>Baselines</h3><p>Complex models must compete against a simple persistence baseline; improvement is reported rather than assumed.</p></article>
         <article><span>06</span><h3>Failure analysis</h3><p>Sector-level errors and weak performance are shown so users can see where the model is least reliable.</p></article>
+        <article><span>07</span><h3>Freshness governance</h3><p>Newer QCEW, BFS, and BEA releases are kept in a separate context layer unless they can be integrated historically without future leakage.</p></article>
       </div>
     </section>
 
@@ -143,12 +166,12 @@
       <div class="shell">
         <div class="section-head"><div><span class="eyebrow">Auditability</span><h2>Source → script → artifact → claim.</h2><p>The strongest version of this project should survive a skeptical technical interview. This section exposes the evidence chain instead of asking users to trust the interface.</p></div><a class="button" href="research/reproducibility.md">Rebuild guide</a></div>
         <div class="lineage-grid"><article><b>1 · Source fingerprint</b><p id="sourceFingerprint"></p></article><article><b>2 · Deterministic pipeline</b><p>Versioned Python scripts build the panel, score, model evaluation, sensitivity runs, and diagnostics.</p></article><article><b>3 · Research artifacts</b><p id="artifactFingerprint"></p></article><article><b>4 · Falsifiable claims</b><p>Unsupported results remain visible; future M&amp;A hypotheses stay explicitly untested until transaction data exists.</p></article></div>
-        <div class="repro-links"><a class="button" href="research/hypothesis-registry.md">Claims & hypothesis registry</a><a class="button" href="research/model-card.md">Model card</a><a class="button" href="data/reproducibility_manifest.json">Machine-readable fingerprint</a></div>
+        <div class="repro-links"><a class="button" href="research/hypothesis-registry.md">Claims & hypothesis registry</a><a class="button" href="research/model-card.md">Model card</a><a class="button" href="data/reproducibility_manifest.json">Machine-readable fingerprint</a><a class="button" href="data/current_context.json">Current-source registry</a></div>
       </div>
     </section>
 
     <section id="sources" class="shell section">
-      <div class="section-head"><div><span class="eyebrow">Evidence registry</span><h2>Official public sources</h2><p>Each factual public-data statement links to the issuing agency. Research-derived statements are traceable to versioned scripts and outputs.</p></div></div>
+      <div class="section-head"><div><span class="eyebrow">Evidence registry</span><h2>Official public sources</h2><p>Each factual public-data statement links to the issuing agency. Research-derived statements are traceable to versioned scripts and outputs. The current-context layer is governed separately so newer releases cannot silently alter historical scores.</p></div><a class="button" href="research/source-governance.md">Freshness & source policy</a></div>
       <div class="source-grid" id="sourceGrid"></div>
     </section>
 
@@ -169,13 +192,13 @@
           <p>His work includes finance and M&amp;A research, AI/data products, a cyber-risk intelligence initiative, and 30+ industry certifications and credentials spanning finance, artificial intelligence, cybersecurity, and technology. Outside technology and finance, he has competed seriously in pickleball and independently secured sponsorships/partnerships with brands including Paddletek, Franklin Sports, HEAD, and Acacia Sports.</p>
           <div class="about-tags"><span>Finance &amp; M&amp;A</span><span>AI / Data Science</span><span>Cybersecurity</span><span>Independent Research</span><span>Product Building</span></div>
           <div class="about-contact"><b>Contact:</b> <a href="mailto:avadhanula.shriyan@gmail.com">avadhanula.shriyan@gmail.com</a></div>
-<div class="hero-actions"><a class="button primary" href="https://github.com/SriBYJU/US-Consolidation-Observatory" target="_blank" rel="noreferrer">GitHub repository ↗</a><a class="button" href="https://www.linkedin.com/in/shriyan-avadhanula" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="button" href="mailto:avadhanula.shriyan@gmail.com">Email me</a></div>
+          <div class="hero-actions"><a class="button primary" href="https://github.com/SriBYJU/US-Consolidation-Observatory" target="_blank" rel="noreferrer">GitHub repository ↗</a><a class="button" href="https://www.linkedin.com/in/shriyan-avadhanula" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="button" href="mailto:avadhanula.shriyan@gmail.com">Email me</a></div>
         </div>
       </div>
     </section>
 
     <section id="limitations" class="section limit-section">
-      <div class="shell"><span class="eyebrow">Research integrity</span><h2>What this release does not prove</h2><div class="limit-grid"><article><h3>No M&amp;A causality yet</h3><p>BDS measures business dynamics, not acquisitions. Transaction-level validation must be added before any claim that the model predicts consolidation events.</p></article><article><h3>Fragmentation is a proxy</h3><p>Firms per 1,000 employees is useful for structural comparison but does not equal a market-share concentration measure such as HHI.</p></article><article><h3>Public-data publication lags</h3><p>The latest BDS release currently covers through 2023. The platform timestamps data vintages so later releases can be replayed honestly.</p></article><article><h3>Not investment advice</h3><p>The score does not evaluate price, leverage, cash flow, management quality, deal terms, or expected returns.</p></article></div></div>
+      <div class="shell"><span class="eyebrow">Research integrity</span><h2>What this release does not prove</h2><div class="limit-grid"><article><h3>No M&amp;A causality yet</h3><p>BDS measures business dynamics, not acquisitions. Transaction-level validation must be added before any claim that the model predicts consolidation events.</p></article><article><h3>Fragmentation is a proxy</h3><p>Firms per 1,000 employees is useful for structural comparison but does not equal a market-share concentration measure such as HHI.</p></article><article><h3>Different sources have different lags</h3><p>The core BDS panel currently ends in 2023, while the separate context layer reaches Q4 2025, Q1 2026, and July 2026 depending on the source. The platform shows those vintages rather than pretending they are one date.</p></article><article><h3>Not investment advice</h3><p>The score does not evaluate price, leverage, cash flow, management quality, deal terms, or expected returns.</p></article></div></div>
     </section>
 
     <section class="shell section forecast-ledger">
@@ -183,7 +206,7 @@
     </section>
   </main>
 
-  <footer><div class="shell footer-inner"><div><b>U.S. Consolidation Observatory</b><p>Technical platform v0.3 · data and methods before marketing.</p></div><div><a href="README.md">README</a><a href="MASTER_CHECKLIST.md">Release audit</a><a href="RESEARCH_MILESTONES.md">Research milestones</a><a href="research/limitations.md">Limitations</a></div></div></footer>
+  <footer><div class="shell footer-inner"><div><b>U.S. Consolidation Observatory</b><p>Technical platform v0.4 · historical rigor + current official context.</p></div><div><a href="README.md">README</a><a href="MASTER_CHECKLIST.md">Release audit</a><a href="RESEARCH_MILESTONES.md">Research milestones</a><a href="research/source-governance.md">Source governance</a><a href="research/limitations.md">Limitations</a></div></div></footer>
   <script src="assets/app.js" defer></script>
 </body>
 </html>
