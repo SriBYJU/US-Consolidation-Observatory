@@ -17,11 +17,32 @@ class P(HTMLParser):
         if tag=='img':self.imgs.append(a)
 html=(ROOT/'index.html').read_text(); js=(ROOT/'assets/app.js').read_text(); p=P();p.feed(html)
 check('HTML IDs are unique',len(p.ids)==len(set(p.ids)),f'{len(p.ids)} ids')
-for anchor in ['public-data','guide','explorer','workbench','validation','replay','methodology','reproducibility','sources','query','about','limitations']:
+for anchor in ['public-data','current-context','guide','explorer','workbench','validation','replay','methodology','reproducibility','sources','query','about','limitations']:
     check(f'Anchor exists: #{anchor}',anchor in p.ids)
 internal=[h for h in p.hrefs if h and not h.startswith(('http://','https://','mailto:','#'))]
 check('All internal linked files exist',all((ROOT/h.split('#')[0]).exists() for h in internal),f'{len(internal)} links')
 check('Primary script exists',all((ROOT/s).exists() for s in p.scripts),','.join(p.scripts))
+
+# Current-context freshness / source-governance layer
+ctx_path=ROOT/'data/current_context.json'; gov_path=ROOT/'research/source-governance.md'
+check('Current-context registry exists',ctx_path.exists(),'data/current_context.json')
+check('Source-governance document exists',gov_path.exists(),'research/source-governance.md')
+ctx=json.loads(ctx_path.read_text()) if ctx_path.exists() else {'sources':[],'policy':{}}
+ctx_sources={x.get('id'):x for x in ctx.get('sources',[])}
+check('Current-context registry has six governed sources',len(ctx.get('sources',[]))>=6,str(len(ctx.get('sources',[]))))
+check('Context registry is dated for v0.4 audit',ctx.get('as_of')=='2026-08-23',str(ctx.get('as_of')))
+check('BDS remains the only current SRS source',sum(1 for x in ctx.get('sources',[]) if x.get('used_in_srs'))==1 and ctx_sources.get('census_bds_2023',{}).get('used_in_srs') is True)
+check('BDS vintage remains 2023',ctx_sources.get('census_bds_2023',{}).get('latest_vintage')=='2023')
+q=ctx_sources.get('bls_qcew_q4_2025',{}); qm=q.get('headline_metrics',{})
+check('QCEW current context is Q4 2025',q.get('latest_vintage')=='Q4 2025' and qm.get('december_2025_employment')==156700000 and qm.get('q4_2025_avg_weekly_wage_usd')==1569)
+b=ctx_sources.get('census_bfs_july_2026',{}); bm=b.get('headline_metrics',{})
+check('BFS current context is July 2026',b.get('latest_vintage')=='July 2026' and bm.get('seasonally_adjusted_business_applications')==578926 and bm.get('projected_formations_within_4q')==29959)
+g=ctx_sources.get('bea_state_gdp_q1_2026',{}); gm=g.get('headline_metrics',{})
+check('BEA current context is Q1 2026',g.get('latest_vintage')=='Q1 2026' and gm.get('states_with_real_gdp_increase')==46 and gm.get('highest_annualized_pct')==4.5 and gm.get('lowest_annualized_pct')==-1.6)
+check('Current-context sources use official federal domains',all(any(d in x.get('source_url','') for d in ['census.gov','bls.gov','bea.gov','sec.gov']) for x in ctx.get('sources',[])))
+check('Current-context policy forbids mixed-vintage SRS blending','not blended into srs' in (ctx.get('policy',{}).get('srs_rule','')).lower())
+check('Public UI exposes freshness matrix and context boundary','id="freshnessMatrix"' in html and 'not blended into SRS' in html and 'Freshness layer · through July 2026' in html)
+check('Public UI links official BFS, QCEW and BEA sources',all(x in html for x in ['census.gov/econ/bfs/current','bls.gov/news.release/cewqtr.nr0','bea.gov/data/gdp/gdp-state']))
 
 m=json.loads((SITE/'manifest.json').read_text());states=m['states'];sectors=m['sectors']
 def unpack(pack): return [dict(zip(pack['k'],r)) for r in pack['r']]
@@ -58,7 +79,9 @@ for control in ['stateSelect','sectorSelect','yearSelect','rankSearch','queryBut
     check(f'Interactive control wired: {control}',f'id="{control}"' in html and control in js)
 check('Data-load error degrades gracefully','data-error-banner' in js and 'renderStaticScaffold' in js)
 check('About image has an explicit fallback',bool(p.imgs) and 'onerror' in p.imgs[0])
-check('No pickleball 4.5 claim appears in viewer HTML','4.5' not in html)
+html_lower=html.lower()
+check('No pickleball 4.5 claim appears in viewer HTML','4.5 singles' not in html_lower and '4.5 pickleball' not in html_lower and 'pickleball experience, including competing at the 4.5' not in html_lower)
+check('v0.4 footer/version label is public','Technical platform v0.4' in html and 'Version 0.4' in html)
 
 failed=[x for x in results if not x[1]]
 print(f'\nEND-TO-END RESULT: {len(results)-len(failed)}/{len(results)} checks passed')
